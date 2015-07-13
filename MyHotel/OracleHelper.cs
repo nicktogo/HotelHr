@@ -19,7 +19,7 @@ namespace OracleDBHelper
         {
             //-修改过
             //connectionString = "User id=scott;password=0000;data source=localhost:1521/orcl;";
-            connectionString = "User id=scott;password=tjsselps;data source=192.168.1.175:1521/hotel;";
+            connectionString = "User id=scott;password=tjsselps;data source=221.239.198.134/hotel;";
             //修改过-
             conn = new OracleConnection(connectionString);
             conn.Open();
@@ -71,6 +71,7 @@ namespace OracleDBHelper
         }
 
         //-K
+        //UpdateEmployeeJobTitle
         public bool UpdateEmployeeJobTitle(string employeeId,string newPosition)
         {
             cmd.CommandText = "update works set position='" + newPosition + "' where employ_id=" + employeeId;
@@ -84,6 +85,22 @@ namespace OracleDBHelper
                 return true;
             }
         }
+
+        //UpdateEmployeeSalary
+        public bool UpdateEmployeeSalary(string employeeId, int newSalary)
+        {
+            cmd.CommandText = "update works set salary=" + newSalary + "  where employ_id=" + employeeId;
+            
+            if (cmd.ExecuteNonQuery() <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
 
         public DataTable showEmployeeJobTitle()
         {
@@ -130,6 +147,11 @@ namespace OracleDBHelper
 
 
 
+
+        internal void UpdateEmployeeSalary(string p1, string p2)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
 

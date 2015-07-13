@@ -16,12 +16,3 @@ C:\Users\昊南\Desktop\MyHotel\MyHotel\obj\Debug\MyHotel.csprojResolveAssemblyR
 C:\Users\昊南\Desktop\MyHotel\MyHotel\obj\Debug\HotelHR.HrManage.resources
 C:\Users\昊南\Desktop\MyHotel\MyHotel\obj\Debug\MyHotel.Properties.Resources.resources
 C:\Users\昊南\Desktop\MyHotel\MyHotel\obj\Debug\MyHotel.csproj.GenerateResource.Cache
-D:\desktop\Hotel\HotelHr\MyHotel\bin\Debug\MyHotel.exe.config
-D:\desktop\Hotel\HotelHr\MyHotel\obj\Debug\MyHotel.exe
-D:\desktop\Hotel\HotelHr\MyHotel\obj\Debug\MyHotel.pdb
-D:\desktop\Hotel\HotelHr\MyHotel\bin\Debug\MyHotel.exe
-D:\desktop\Hotel\HotelHr\MyHotel\bin\Debug\MyHotel.pdb
-D:\desktop\Hotel\HotelHr\MyHotel\obj\Debug\MyHotel.csprojResolveAssemblyReference.cache
-D:\desktop\Hotel\HotelHr\MyHotel\obj\Debug\HotelHR.HrManage.resources
-D:\desktop\Hotel\HotelHr\MyHotel\obj\Debug\MyHotel.Properties.Resources.resources
-D:\desktop\Hotel\HotelHr\MyHotel\obj\Debug\MyHotel.csproj.GenerateResource.Cache
