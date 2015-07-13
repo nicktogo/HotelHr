@@ -27,7 +27,7 @@ namespace HotelHR
         //submit a employee perform
         private void submitButton_Click(object sender, EventArgs e)
         {
-
+            //test test
             var result = MessageBox.Show("Sure to submit?", "",MessageBoxButtons.YesNo);
 
             //confirm to submit
