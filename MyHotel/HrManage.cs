@@ -63,9 +63,29 @@ namespace HotelHR
         //show employee info
         private void employPerform_Selecting(object sender, TabControlCancelEventArgs e)
         {
-
             employeeInfo.DataSource = helper.showEmployeePerform();
+
+            employeeJobTitle.DataSource = helper.showEmployeeJobTitle();
+            employeeJobTitle.Columns[0].ReadOnly = true;
+            employeeJobTitle.Columns[1].ReadOnly = true;
+
+            employeeSalary.DataSource = helper.showEmployeeSalary();
+            this.employeeSalary.Columns[0].ReadOnly = true;
+            this.employeeSalary.Columns[1].ReadOnly = true;
         }
+
+        private void employeeJobTitle_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if(employeeJobTitle.Rows.Count > 0)
+            {
+                helper.UpdateEmployeeJobTitle(this.employeeJobTitle.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeJobTitle.Rows[e.RowIndex].Cells[2].Value.ToString());   
+            }
+        }
+
+
+
+
+
 
         private void promoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -76,5 +96,32 @@ namespace HotelHR
         {
 
         }
+
+        private void employPerform_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void employeeInfo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        //-K salary
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+
+        
+
+       
+        
+        //K-
     }
 }

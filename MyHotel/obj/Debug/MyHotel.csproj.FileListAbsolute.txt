@@ -7,3 +7,12 @@ D:\Developer\csharp\MyHotel\MyHotel\bin\Debug\MyHotel.pdb
 D:\Developer\csharp\MyHotel\MyHotel\obj\Debug\MyHotel.exe
 D:\Developer\csharp\MyHotel\MyHotel\obj\Debug\MyHotel.pdb
 D:\Developer\csharp\MyHotel\MyHotel\obj\Debug\HotelHR.HrManage.resources
+C:\Users\昊南\Desktop\MyHotel\MyHotel\bin\Debug\MyHotel.exe.config
+C:\Users\昊南\Desktop\MyHotel\MyHotel\obj\Debug\MyHotel.exe
+C:\Users\昊南\Desktop\MyHotel\MyHotel\obj\Debug\MyHotel.pdb
+C:\Users\昊南\Desktop\MyHotel\MyHotel\bin\Debug\MyHotel.exe
+C:\Users\昊南\Desktop\MyHotel\MyHotel\bin\Debug\MyHotel.pdb
+C:\Users\昊南\Desktop\MyHotel\MyHotel\obj\Debug\MyHotel.csprojResolveAssemblyReference.cache
+C:\Users\昊南\Desktop\MyHotel\MyHotel\obj\Debug\HotelHR.HrManage.resources
+C:\Users\昊南\Desktop\MyHotel\MyHotel\obj\Debug\MyHotel.Properties.Resources.resources
+C:\Users\昊南\Desktop\MyHotel\MyHotel\obj\Debug\MyHotel.csproj.GenerateResource.Cache
