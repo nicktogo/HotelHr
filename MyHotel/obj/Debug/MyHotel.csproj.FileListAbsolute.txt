@@ -1,0 +1,9 @@
+D:\Developer\csharp\MyHotel\MyHotel\bin\Debug\MyHotel.exe.config
+D:\Developer\csharp\MyHotel\MyHotel\obj\Debug\MyHotel.csprojResolveAssemblyReference.cache
+D:\Developer\csharp\MyHotel\MyHotel\obj\Debug\MyHotel.Properties.Resources.resources
+D:\Developer\csharp\MyHotel\MyHotel\obj\Debug\MyHotel.csproj.GenerateResource.Cache
+D:\Developer\csharp\MyHotel\MyHotel\bin\Debug\MyHotel.exe
+D:\Developer\csharp\MyHotel\MyHotel\bin\Debug\MyHotel.pdb
+D:\Developer\csharp\MyHotel\MyHotel\obj\Debug\MyHotel.exe
+D:\Developer\csharp\MyHotel\MyHotel\obj\Debug\MyHotel.pdb
+D:\Developer\csharp\MyHotel\MyHotel\obj\Debug\HotelHR.HrManage.resources
