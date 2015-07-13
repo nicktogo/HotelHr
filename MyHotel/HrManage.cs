@@ -27,7 +27,7 @@ namespace HotelHR
         //submit a employee perform
         private void submitButton_Click(object sender, EventArgs e)
         {
-            //test test
+
             var result = MessageBox.Show("Sure to submit?", "",MessageBoxButtons.YesNo);
 
             //confirm to submit
@@ -70,10 +70,11 @@ namespace HotelHR
             employeeJobTitle.Columns[1].ReadOnly = true;
 
             employeeSalary.DataSource = helper.showEmployeeSalary();
-            this.employeeSalary.Columns[0].ReadOnly = true;
-            this.employeeSalary.Columns[1].ReadOnly = true;
+            employeeSalary.Columns[0].ReadOnly = true;
+            employeeSalary.Columns[1].ReadOnly = true;
         }
 
+        //employeeJobTitle update
         private void employeeJobTitle_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if(employeeJobTitle.Rows.Count > 0)
@@ -82,7 +83,14 @@ namespace HotelHR
             }
         }
 
-
+        //employeeJobTitle update
+        private void employeeSalary_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (employeeSalary.Rows.Count > 0)
+            {
+                helper.UpdateEmployeeSalary(this.employeeSalary.Rows[e.RowIndex].Cells[0].Value.ToString(), int.Parse(this.employeeSalary.Rows[e.RowIndex].Cells[2].Value.ToString()));
+            }
+        }
 
 
 

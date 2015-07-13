@@ -224,6 +224,7 @@
             this.employeeSalary.Name = "employeeSalary";
             this.employeeSalary.Size = new System.Drawing.Size(1224, 562);
             this.employeeSalary.TabIndex = 0;
+            this.employeeSalary.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.employeeSalary_CellEndEdit);
             // 
             // tabPage4
             // 
