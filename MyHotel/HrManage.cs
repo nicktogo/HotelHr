@@ -22,6 +22,7 @@ namespace HotelHR
         {
             InitializeComponent();
             helper = new OracleHelper();
+            employeePerform.DataSource = helper.showEmployeePerform();
         }
 
         //Page Control
@@ -37,9 +38,14 @@ namespace HotelHR
             employeeSalary.DataSource = helper.showEmployeeSalary();
             employeeSalary.Columns[0].ReadOnly = true;
             employeeSalary.Columns[1].ReadOnly = true;
+
+            employeeInfo.DataSource = helper.showEmployeeInfo();
+            //employeeInfo.Columns[7].Visible = false;
+            //employeeInfo.Columns[8].Visible = false;
         }
 
         //EmployeePerform Page
+
         //submit a employee perform
         private void submitButton_Click(object sender, EventArgs e)
         {
@@ -96,7 +102,19 @@ namespace HotelHR
             }
         }
 
+
         //Salary Page
+        //
+        private void showAll2_Click(object sender, EventArgs e)
+        {
+            employeeSalary.DataSource = helper.showEmployeeSalary();
+        }
+        //submitButton3_Click
+        private void submitButton3_Click(object sender, EventArgs e)
+        {
+            employeeSalary.DataSource = helper.searchSalary(employeeIdBox3.Text);
+        }
+
         //employeeSalary update
         private void employeeSalary_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -128,7 +146,6 @@ namespace HotelHR
         {
 
         }
-        //-K salary
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -138,7 +155,6 @@ namespace HotelHR
         {
 
         }
-
         private void jobTitleMenuStrip_Opening(object sender, CancelEventArgs e)
         {
 
@@ -165,16 +181,10 @@ namespace HotelHR
             this.employPerform.SelectedIndex = 3;
         }
 
-
         private void employeeIdBox_TextChanged(object sender, EventArgs e)
         {
 
         }
-
-        
-
-        
-
 
         private void button1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -226,6 +236,13 @@ namespace HotelHR
             this.infoButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.employPerform.SelectedIndex = 2;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
         
 
        
