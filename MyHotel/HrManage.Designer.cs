@@ -43,6 +43,10 @@
             this.employeeIdLabel = new System.Windows.Forms.Label();
             this.employeeIdBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.showAll = new System.Windows.Forms.Button();
+            this.submitButton2 = new System.Windows.Forms.Button();
+            this.employeeIdBox2 = new System.Windows.Forms.TextBox();
+            this.employeeIdLabel2 = new System.Windows.Forms.Label();
             this.employeeJobTitle = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.employeeSalary = new System.Windows.Forms.DataGridView();
@@ -203,9 +207,14 @@
             this.employeeIdBox.Name = "employeeIdBox";
             this.employeeIdBox.Size = new System.Drawing.Size(146, 21);
             this.employeeIdBox.TabIndex = 0;
+            this.employeeIdBox.TextChanged += new System.EventHandler(this.employeeIdBox_TextChanged);
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.showAll);
+            this.tabPage2.Controls.Add(this.submitButton2);
+            this.tabPage2.Controls.Add(this.employeeIdBox2);
+            this.tabPage2.Controls.Add(this.employeeIdLabel2);
             this.tabPage2.Controls.Add(this.employeeJobTitle);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -214,6 +223,43 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Job Title";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // showAll
+            // 
+            this.showAll.Location = new System.Drawing.Point(418, 6);
+            this.showAll.Name = "showAll";
+            this.showAll.Size = new System.Drawing.Size(89, 23);
+            this.showAll.TabIndex = 4;
+            this.showAll.Text = "show all";
+            this.showAll.UseVisualStyleBackColor = true;
+            this.showAll.Click += new System.EventHandler(this.showAll_Click);
+            // 
+            // submitButton2
+            // 
+            this.submitButton2.Location = new System.Drawing.Point(294, 7);
+            this.submitButton2.Name = "submitButton2";
+            this.submitButton2.Size = new System.Drawing.Size(75, 23);
+            this.submitButton2.TabIndex = 3;
+            this.submitButton2.Text = "submit";
+            this.submitButton2.UseVisualStyleBackColor = true;
+            this.submitButton2.Click += new System.EventHandler(this.submitButton2_Click);
+            // 
+            // employeeIdBox2
+            // 
+            this.employeeIdBox2.Location = new System.Drawing.Point(163, 6);
+            this.employeeIdBox2.Name = "employeeIdBox2";
+            this.employeeIdBox2.Size = new System.Drawing.Size(100, 25);
+            this.employeeIdBox2.TabIndex = 2;
+            // 
+            // employeeIdLabel2
+            // 
+            this.employeeIdLabel2.AutoSize = true;
+            this.employeeIdLabel2.Location = new System.Drawing.Point(54, 16);
+            this.employeeIdLabel2.Name = "employeeIdLabel2";
+            this.employeeIdLabel2.Size = new System.Drawing.Size(103, 15);
+            this.employeeIdLabel2.TabIndex = 1;
+            this.employeeIdLabel2.Text = "Employee id:";
+            this.employeeIdLabel2.Click += new System.EventHandler(this.label1_Click);
             // 
             // employeeJobTitle
             // 
@@ -384,6 +430,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeJobTitle)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.employeeSalary)).EndInit();
@@ -416,6 +463,7 @@
         private System.Windows.Forms.ToolStripMenuItem promoteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.DataGridView employeeSalary;
+<<<<<<< HEAD
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
@@ -423,6 +471,12 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+=======
+        private System.Windows.Forms.Label employeeIdLabel2;
+        private System.Windows.Forms.TextBox employeeIdBox2;
+        private System.Windows.Forms.Button submitButton2;
+        private System.Windows.Forms.Button showAll;
+>>>>>>> 1ef5967cdddbc5f1841a3fd82db1877ce28f3238
         //-K
         
         //-K

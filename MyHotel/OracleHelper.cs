@@ -29,6 +29,7 @@ namespace OracleDBHelper
             cmd.CommandType = CommandType.Text;
         }
 
+        //EmployeePerform Page
         public bool insertEmployeePerform(string employeeId,string reason, int type)
         {
             OracleParameter pID = new OracleParameter("id", employeeId);
@@ -53,26 +54,34 @@ namespace OracleDBHelper
             }
         }
 
-        public DataTable showEmployeePerform()
+        //-K
+
+        //JobTitle Page
+        //SearchJobTitle
+        public DataTable searchJobTitle(string employeeId)
         {
-            DataTable infoTable;
+            DataTable SearchJobTitleTable;
 
-            cmd.CommandText = "select * from employ";
+            cmd.CommandText = "select e.employ_id,employ_name,position from employ e,works w where e.employ_id = w.employ_id and e.employ_id ='" + employeeId + "'";
 
-            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
+            
+                //employeeJobTitle.DataSource = this.showEmployeeJobTitle();
+            
+                OracleDataAdapter adapter = new OracleDataAdapter(cmd);
 
-            DataSet dataSet = new DataSet();
+                DataSet dataSet = new DataSet();
 
-            adapter.Fill(dataSet);
+            
+                adapter.Fill(dataSet);
 
-            infoTable = dataSet.Tables[0];
+                SearchJobTitleTable = dataSet.Tables[0];
 
-            return infoTable;
+                return SearchJobTitleTable;
+            
         }
 
-        //-K
         //UpdateEmployeeJobTitle
-        public bool UpdateEmployeeJobTitle(string employeeId,string newPosition)
+        public bool updateEmployeeJobTitle(string employeeId,string newPosition)
         {
             cmd.CommandText = "update works set position='" + newPosition + "' where employ_id=" + employeeId;
             
@@ -85,22 +94,6 @@ namespace OracleDBHelper
                 return true;
             }
         }
-
-        //UpdateEmployeeSalary
-        public bool UpdateEmployeeSalary(string employeeId, int newSalary)
-        {
-            cmd.CommandText = "update works set salary=" + newSalary + "  where employ_id=" + employeeId;
-            
-            if (cmd.ExecuteNonQuery() <= 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
 
         public DataTable showEmployeeJobTitle()
         {
@@ -119,6 +112,22 @@ namespace OracleDBHelper
             JobTitleTable = dataSet.Tables[0];
 
             return JobTitleTable;
+        }
+
+        //Salary Page
+        //UpdateEmployeeSalary
+        public bool updateEmployeeSalary(string employeeId, int newSalary)
+        {
+            cmd.CommandText = "update works set salary=" + newSalary + "  where employ_id=" + employeeId;
+
+            if (cmd.ExecuteNonQuery() <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public DataTable showEmployeeSalary()
@@ -140,18 +149,37 @@ namespace OracleDBHelper
             return SalaryTable;
         }
         //K-
+
+        //Info Page
+        public DataTable showEmployeePerform()
+        {
+            DataTable infoTable;
+
+            cmd.CommandText = "select * from employ";
+
+            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
+
+            DataSet dataSet = new DataSet();
+
+            adapter.Fill(dataSet);
+
+            infoTable = dataSet.Tables[0];
+
+            return infoTable;
+        }
+
+
+
+
         public void closeCon()
         {
             conn.Dispose();
         }
 
-
-
-
-        internal void UpdateEmployeeSalary(string p1, string p2)
-        {
-            throw new System.NotImplementedException();
-        }
+        //internal void UpdateEmployeeSalary(string p1, string p2)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
     }
 }
 
