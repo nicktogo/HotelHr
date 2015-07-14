@@ -29,6 +29,23 @@ namespace OracleDBHelper
             cmd.CommandType = CommandType.Text;
         }
 
+        public DataTable showEmployeePerform()
+        {
+            DataTable PerformTable;
+
+            cmd.CommandText = "select b.employ_id,employ_name,reason,be_type,behavior_id from behavior b,employ e where b.employ_id=e.employ_id";
+
+            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
+
+            DataSet dataSet = new DataSet();
+
+            adapter.Fill(dataSet);
+
+            PerformTable = dataSet.Tables[0];
+
+            return PerformTable;
+        }
+
         //EmployeePerform Page
         public bool insertEmployeePerform(string employeeId,string reason, int type)
         {
@@ -115,6 +132,24 @@ namespace OracleDBHelper
         }
 
         //Salary Page
+        //SearchSalary
+        public DataTable searchSalary(string employeeId)
+        {
+            DataTable SearchSalaryTable;
+
+            cmd.CommandText = "select e.employ_id,employ_name,salary from employ e,works w where e.employ_id = w.employ_id and e.employ_id ='" + employeeId + "'";
+
+            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
+
+            DataSet dataSet = new DataSet();
+
+            adapter.Fill(dataSet);
+
+            SearchSalaryTable = dataSet.Tables[0];
+
+            return SearchSalaryTable;
+        }
+
         //UpdateEmployeeSalary
         public bool updateEmployeeSalary(string employeeId, int newSalary)
         {
