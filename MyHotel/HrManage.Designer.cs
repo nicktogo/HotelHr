@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HrManage));
             this.employPerform = new System.Windows.Forms.TabControl();
             this.performPage = new System.Windows.Forms.TabPage();
+            this.employeePerform = new System.Windows.Forms.DataGridView();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.submitButton = new System.Windows.Forms.Button();
@@ -60,9 +61,9 @@
             this.jobButton = new System.Windows.Forms.Button();
             this.salaryButton = new System.Windows.Forms.Button();
             this.infoButton = new System.Windows.Forms.Button();
-            this.employeePerform = new System.Windows.Forms.DataGridView();
             this.employPerform.SuspendLayout();
             this.performPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.employeePerform)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.jobPage.SuspendLayout();
@@ -72,7 +73,6 @@
             this.infoPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeInfo)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.employeePerform)).BeginInit();
             this.SuspendLayout();
             // 
             // employPerform
@@ -92,6 +92,7 @@
             // performPage
             // 
             this.performPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("performPage.BackgroundImage")));
+            this.performPage.Controls.Add(this.employeePerform);
             this.performPage.Controls.Add(this.pictureBox2);
             this.performPage.Controls.Add(this.pictureBox1);
             this.performPage.Controls.Add(this.submitButton);
@@ -103,13 +104,25 @@
             this.performPage.Controls.Add(this.employeeIdLabel);
             this.performPage.Controls.Add(this.employeeIdBox);
             this.performPage.Location = new System.Drawing.Point(4, 22);
-            this.performPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.performPage.Margin = new System.Windows.Forms.Padding(2);
             this.performPage.Name = "performPage";
-            this.performPage.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.performPage.Padding = new System.Windows.Forms.Padding(2);
             this.performPage.Size = new System.Drawing.Size(822, 450);
             this.performPage.TabIndex = 0;
             this.performPage.Text = "Employ Perform";
             this.performPage.UseVisualStyleBackColor = true;
+            // 
+            // employeePerform
+            // 
+            this.employeePerform.AllowUserToAddRows = false;
+            this.employeePerform.AllowUserToDeleteRows = false;
+            this.employeePerform.AllowUserToOrderColumns = true;
+            this.employeePerform.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.employeePerform.Location = new System.Drawing.Point(482, 8);
+            this.employeePerform.Name = "employeePerform";
+            this.employeePerform.RowTemplate.Height = 27;
+            this.employeePerform.Size = new System.Drawing.Size(341, 446);
+            this.employeePerform.TabIndex = 11;
             // 
             // pictureBox2
             // 
@@ -219,9 +232,9 @@
             this.jobPage.Controls.Add(this.employeeIdLabel2);
             this.jobPage.Controls.Add(this.employeeJobTitle);
             this.jobPage.Location = new System.Drawing.Point(4, 22);
-            this.jobPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.jobPage.Margin = new System.Windows.Forms.Padding(2);
             this.jobPage.Name = "jobPage";
-            this.jobPage.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.jobPage.Padding = new System.Windows.Forms.Padding(2);
             this.jobPage.Size = new System.Drawing.Size(822, 450);
             this.jobPage.TabIndex = 1;
             this.jobPage.Text = "Job Title";
@@ -282,9 +295,9 @@
             // 
             this.salaryPage.Controls.Add(this.employeeSalary);
             this.salaryPage.Location = new System.Drawing.Point(4, 22);
-            this.salaryPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.salaryPage.Margin = new System.Windows.Forms.Padding(2);
             this.salaryPage.Name = "salaryPage";
-            this.salaryPage.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.salaryPage.Padding = new System.Windows.Forms.Padding(2);
             this.salaryPage.Size = new System.Drawing.Size(822, 450);
             this.salaryPage.TabIndex = 2;
             this.salaryPage.Text = "Salary";
@@ -298,7 +311,7 @@
             this.employeeSalary.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.employeeSalary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.employeeSalary.Location = new System.Drawing.Point(3, 46);
-            this.employeeSalary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.employeeSalary.Margin = new System.Windows.Forms.Padding(2);
             this.employeeSalary.Name = "employeeSalary";
             this.employeeSalary.Size = new System.Drawing.Size(818, 404);
             this.employeeSalary.TabIndex = 0;
@@ -308,7 +321,7 @@
             // 
             this.infoPage.Controls.Add(this.employeeInfo);
             this.infoPage.Location = new System.Drawing.Point(4, 22);
-            this.infoPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.infoPage.Margin = new System.Windows.Forms.Padding(2);
             this.infoPage.Name = "infoPage";
             this.infoPage.Size = new System.Drawing.Size(822, 450);
             this.infoPage.TabIndex = 3;
@@ -381,7 +394,7 @@
             this.performButton.Font = new System.Drawing.Font("STHupo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.performButton.ForeColor = System.Drawing.Color.White;
             this.performButton.Location = new System.Drawing.Point(9, 2);
-            this.performButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.performButton.Margin = new System.Windows.Forms.Padding(2);
             this.performButton.Name = "performButton";
             this.performButton.Size = new System.Drawing.Size(98, 20);
             this.performButton.TabIndex = 4;
@@ -395,7 +408,7 @@
             this.jobButton.Font = new System.Drawing.Font("STHupo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.jobButton.ForeColor = System.Drawing.Color.White;
             this.jobButton.Location = new System.Drawing.Point(126, 2);
-            this.jobButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.jobButton.Margin = new System.Windows.Forms.Padding(2);
             this.jobButton.Name = "jobButton";
             this.jobButton.Size = new System.Drawing.Size(98, 20);
             this.jobButton.TabIndex = 5;
@@ -409,7 +422,7 @@
             this.salaryButton.Font = new System.Drawing.Font("STHupo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.salaryButton.ForeColor = System.Drawing.Color.White;
             this.salaryButton.Location = new System.Drawing.Point(250, 1);
-            this.salaryButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.salaryButton.Margin = new System.Windows.Forms.Padding(2);
             this.salaryButton.Name = "salaryButton";
             this.salaryButton.Size = new System.Drawing.Size(98, 20);
             this.salaryButton.TabIndex = 6;
@@ -423,25 +436,13 @@
             this.infoButton.Font = new System.Drawing.Font("STHupo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.infoButton.ForeColor = System.Drawing.Color.White;
             this.infoButton.Location = new System.Drawing.Point(364, 1);
-            this.infoButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.infoButton.Margin = new System.Windows.Forms.Padding(2);
             this.infoButton.Name = "infoButton";
             this.infoButton.Size = new System.Drawing.Size(98, 20);
             this.infoButton.TabIndex = 7;
             this.infoButton.Text = "Info";
             this.infoButton.UseVisualStyleBackColor = true;
             this.infoButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button4_MouseDown);
-            // 
-            // employeePerform
-            // 
-            this.employeePerform.AllowUserToAddRows = false;
-            this.employeePerform.AllowUserToDeleteRows = false;
-            this.employeePerform.AllowUserToOrderColumns = true;
-            this.employeePerform.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.employeePerform.Location = new System.Drawing.Point(638, 13);
-            this.employeePerform.Name = "employeePerform";
-            this.employeePerform.RowTemplate.Height = 27;
-            this.employeePerform.Size = new System.Drawing.Size(465, 553);
-            this.employeePerform.TabIndex = 11;
             // 
             // HrManage
             // 
@@ -458,6 +459,7 @@
             this.employPerform.ResumeLayout(false);
             this.performPage.ResumeLayout(false);
             this.performPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.employeePerform)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.jobPage.ResumeLayout(false);
@@ -468,7 +470,6 @@
             this.infoPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.employeeInfo)).EndInit();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.employeePerform)).EndInit();
             this.ResumeLayout(false);
 
         }
