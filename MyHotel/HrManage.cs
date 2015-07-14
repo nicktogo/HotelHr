@@ -23,14 +23,14 @@ namespace HotelHR
             InitializeComponent();
             helper = new OracleHelper();
             employeePerform.DataSource = helper.showEmployeePerform();
+            employeePerform.Columns[1].ReadOnly = true;
+            employeePerform.Columns[4].Visible = false;
         }
 
         //Page Control
         //show employee info
         private void employPerform_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            employeeInfo.DataSource = helper.showEmployeeInfo();
-
             employeeJobTitle.DataSource = helper.showEmployeeJobTitle();
             employeeJobTitle.Columns[0].ReadOnly = true;
             employeeJobTitle.Columns[1].ReadOnly = true;
@@ -41,10 +41,45 @@ namespace HotelHR
 
             employeeInfo.DataSource = helper.showEmployeeInfo();
             //employeeInfo.Columns[7].Visible = false;
-            //employeeInfo.Columns[8].Visible = false;
+            
         }
 
         //EmployeePerform Page
+        //employeePerform update
+        private void employeePerform_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (employeePerform.Rows.Count > 0)
+            {
+                
+                //helper.updateEmployeePerform(this.employeePerform.Rows[e.RowIndex].Cells[0].Value.ToString(),
+                //    this.employeePerform.Rows[e.RowIndex].Cells[2].Value.ToString(),
+                //    int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[3].Value.ToString()),
+                //    int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[4].Value.ToString()));
+                if (e.ColumnIndex == 0)
+                {
+                    int pos = 0;
+                    helper.updateEmployeePerform(pos,this.employeePerform.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
+                        int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[4].Value.ToString()));
+                }
+                else if (e.ColumnIndex == 2)
+                {
+                    int pos = 2;
+                    helper.updateEmployeePerform(pos, this.employeePerform.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
+                        int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[4].Value.ToString()));
+                }
+                else if (e.ColumnIndex == 3)
+                {
+                    int pos = 3;
+                    helper.updateEmployeePerform(pos, int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()),
+                       int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[4].Value.ToString()));
+                }
+                else
+                {
+
+                }
+                employeePerform.DataSource = helper.showEmployeePerform();   
+            }
+        }
 
         //submit a employee perform
         private void submitButton_Click(object sender, EventArgs e)
@@ -238,6 +273,16 @@ namespace HotelHR
         }
 
         private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void employeeIdLabel3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void employeePerform_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
