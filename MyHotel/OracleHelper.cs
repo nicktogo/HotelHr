@@ -30,6 +30,25 @@ namespace OracleDBHelper
         }
 
         //EmployeePerform Page
+        //
+        public DataTable showEmployeePerform()
+        {
+            DataTable PerformTable;
+
+            cmd.CommandText = "select b.employ_id,employ_name,reason,be_type,behavior_id from behavior b,employ e where b.employ_id=e.employ_id";
+
+            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
+
+            DataSet dataSet = new DataSet();
+
+            adapter.Fill(dataSet);
+
+            PerformTable = dataSet.Tables[0];
+
+            return PerformTable;
+        }
+
+        //insertEmployeePerform
         public bool insertEmployeePerform(string employeeId,string reason, int type)
         {
             OracleParameter pID = new OracleParameter("id", employeeId);
@@ -54,7 +73,7 @@ namespace OracleDBHelper
             }
         }
 
-        //-K
+        
 
         //JobTitle Page
         //SearchJobTitle
@@ -64,20 +83,15 @@ namespace OracleDBHelper
 
             cmd.CommandText = "select e.employ_id,employ_name,position from employ e,works w where e.employ_id = w.employ_id and e.employ_id ='" + employeeId + "'";
 
-            
-                //employeeJobTitle.DataSource = this.showEmployeeJobTitle();
-            
-                OracleDataAdapter adapter = new OracleDataAdapter(cmd);
+            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
 
-                DataSet dataSet = new DataSet();
+            DataSet dataSet = new DataSet();
 
-            
-                adapter.Fill(dataSet);
+            adapter.Fill(dataSet);
 
-                SearchJobTitleTable = dataSet.Tables[0];
+            SearchJobTitleTable = dataSet.Tables[0];
 
-                return SearchJobTitleTable;
-            
+            return SearchJobTitleTable;
         }
 
         //UpdateEmployeeJobTitle
@@ -115,6 +129,24 @@ namespace OracleDBHelper
         }
 
         //Salary Page
+        //SearchSalary
+        public DataTable searchSalary(string employeeId)
+        {
+            DataTable SearchSalaryTable;
+
+            cmd.CommandText = "select e.employ_id,employ_name,salary from employ e,works w where e.employ_id = w.employ_id and e.employ_id ='" + employeeId + "'";
+
+            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
+
+            DataSet dataSet = new DataSet();
+
+            adapter.Fill(dataSet);
+
+            SearchSalaryTable = dataSet.Tables[0];
+
+            return SearchSalaryTable;
+        }
+
         //UpdateEmployeeSalary
         public bool updateEmployeeSalary(string employeeId, int newSalary)
         {
@@ -148,14 +180,13 @@ namespace OracleDBHelper
 
             return SalaryTable;
         }
-        //K-
 
         //Info Page
-        public DataTable showEmployeePerform()
+        public DataTable showEmployeeInfo()
         {
             DataTable infoTable;
 
-            cmd.CommandText = "select * from employ";
+           cmd.CommandText = "select * from employ";
 
             OracleDataAdapter adapter = new OracleDataAdapter(cmd);
 

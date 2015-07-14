@@ -22,13 +22,14 @@ namespace HotelHR
         {
             InitializeComponent();
             helper = new OracleHelper();
+            employeePerform.DataSource = helper.showEmployeePerform();
         }
 
         //Page Control
         //show employee info
         private void employPerform_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            employeeInfo.DataSource = helper.showEmployeePerform();
+            //employeePerform.DataSource = helper.showEmployeePerform();
 
             employeeJobTitle.DataSource = helper.showEmployeeJobTitle();
             employeeJobTitle.Columns[0].ReadOnly = true;
@@ -37,9 +38,14 @@ namespace HotelHR
             employeeSalary.DataSource = helper.showEmployeeSalary();
             employeeSalary.Columns[0].ReadOnly = true;
             employeeSalary.Columns[1].ReadOnly = true;
+
+            employeeInfo.DataSource = helper.showEmployeeInfo();
+            //employeeInfo.Columns[7].Visible = false;
+            //employeeInfo.Columns[8].Visible = false;
         }
 
         //EmployeePerform Page
+
         //submit a employee perform
         private void submitButton_Click(object sender, EventArgs e)
         {
@@ -96,10 +102,19 @@ namespace HotelHR
             }
         }
 
-<<<<<<< HEAD
-=======
+
         //Salary Page
->>>>>>> 1ef5967cdddbc5f1841a3fd82db1877ce28f3238
+        //
+        private void showAll2_Click(object sender, EventArgs e)
+        {
+            employeeSalary.DataSource = helper.showEmployeeSalary();
+        }
+        //submitButton3_Click
+        private void submitButton3_Click(object sender, EventArgs e)
+        {
+            employeeSalary.DataSource = helper.searchSalary(employeeIdBox3.Text);
+        }
+
         //employeeSalary update
         private void employeeSalary_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -131,7 +146,6 @@ namespace HotelHR
         {
 
         }
-        //-K salary
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -141,17 +155,15 @@ namespace HotelHR
         {
 
         }
-
-<<<<<<< HEAD
         private void jobTitleMenuStrip_Opening(object sender, CancelEventArgs e)
-=======
+        {
+
+        }
         private void label1_Click(object sender, EventArgs e)
->>>>>>> 1ef5967cdddbc5f1841a3fd82db1877ce28f3238
         {
 
         }
 
-<<<<<<< HEAD
         private void button4_MouseDown(object sender, MouseEventArgs e)
         {
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -168,7 +180,7 @@ namespace HotelHR
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.employPerform.SelectedIndex = 3;
         }
-=======
+
         private void employeeIdBox_TextChanged(object sender, EventArgs e)
         {
 
@@ -178,7 +190,7 @@ namespace HotelHR
 
         
 
->>>>>>> 1ef5967cdddbc5f1841a3fd82db1877ce28f3238
+
 
         private void button1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -230,6 +242,13 @@ namespace HotelHR
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.employPerform.SelectedIndex = 2;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
         
 
        
