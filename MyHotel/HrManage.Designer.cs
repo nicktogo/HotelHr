@@ -118,16 +118,16 @@
             this.employeePerform.AllowUserToDeleteRows = false;
             this.employeePerform.AllowUserToOrderColumns = true;
             this.employeePerform.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.employeePerform.Location = new System.Drawing.Point(482, 8);
+            this.employeePerform.Location = new System.Drawing.Point(521, 8);
             this.employeePerform.Name = "employeePerform";
             this.employeePerform.RowTemplate.Height = 27;
-            this.employeePerform.Size = new System.Drawing.Size(341, 446);
+            this.employeePerform.Size = new System.Drawing.Size(305, 446);
             this.employeePerform.TabIndex = 11;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(226, 109);
+            this.pictureBox2.Location = new System.Drawing.Point(242, 114);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(30, 31);
             this.pictureBox2.TabIndex = 10;
@@ -136,7 +136,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(152, 110);
+            this.pictureBox1.Location = new System.Drawing.Point(168, 115);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(30, 30);
             this.pictureBox1.TabIndex = 9;
@@ -144,8 +144,9 @@
             // 
             // submitButton
             // 
-            this.submitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.submitButton.Location = new System.Drawing.Point(135, 333);
+            this.submitButton.Font = new System.Drawing.Font("STLiti", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.submitButton.Location = new System.Drawing.Point(152, 329);
+            this.submitButton.Margin = new System.Windows.Forms.Padding(2);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(89, 34);
             this.submitButton.TabIndex = 7;
@@ -156,7 +157,8 @@
             // reasonBox
             // 
             this.reasonBox.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.reasonBox.Location = new System.Drawing.Point(135, 169);
+            this.reasonBox.Location = new System.Drawing.Point(151, 171);
+            this.reasonBox.Margin = new System.Windows.Forms.Padding(2);
             this.reasonBox.Multiline = true;
             this.reasonBox.Name = "reasonBox";
             this.reasonBox.Size = new System.Drawing.Size(321, 140);
@@ -168,7 +170,7 @@
             this.reasonLabel.AutoSize = true;
             this.reasonLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.reasonLabel.ForeColor = System.Drawing.Color.White;
-            this.reasonLabel.Location = new System.Drawing.Point(57, 168);
+            this.reasonLabel.Location = new System.Drawing.Point(17, 171);
             this.reasonLabel.Name = "reasonLabel";
             this.reasonLabel.Size = new System.Drawing.Size(87, 24);
             this.reasonLabel.TabIndex = 5;
@@ -177,7 +179,7 @@
             // nagetiveRadio
             // 
             this.nagetiveRadio.AutoSize = true;
-            this.nagetiveRadio.Location = new System.Drawing.Point(210, 120);
+            this.nagetiveRadio.Location = new System.Drawing.Point(226, 125);
             this.nagetiveRadio.Name = "nagetiveRadio";
             this.nagetiveRadio.Size = new System.Drawing.Size(14, 13);
             this.nagetiveRadio.TabIndex = 4;
@@ -187,7 +189,7 @@
             // positiveRadio
             // 
             this.positiveRadio.AutoSize = true;
-            this.positiveRadio.Location = new System.Drawing.Point(135, 119);
+            this.positiveRadio.Location = new System.Drawing.Point(151, 124);
             this.positiveRadio.Name = "positiveRadio";
             this.positiveRadio.Size = new System.Drawing.Size(14, 13);
             this.positiveRadio.TabIndex = 3;
@@ -199,7 +201,7 @@
             this.rateTypeLabel.AutoSize = true;
             this.rateTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.rateTypeLabel.ForeColor = System.Drawing.Color.White;
-            this.rateTypeLabel.Location = new System.Drawing.Point(38, 116);
+            this.rateTypeLabel.Location = new System.Drawing.Point(17, 116);
             this.rateTypeLabel.Name = "rateTypeLabel";
             this.rateTypeLabel.Size = new System.Drawing.Size(103, 24);
             this.rateTypeLabel.TabIndex = 2;
@@ -242,7 +244,7 @@
             // 
             // showAll
             // 
-            this.showAll.Location = new System.Drawing.Point(418, 6);
+            this.showAll.Location = new System.Drawing.Point(457, 25);
             this.showAll.Name = "showAll";
             this.showAll.Size = new System.Drawing.Size(89, 23);
             this.showAll.TabIndex = 4;
@@ -252,7 +254,8 @@
             // 
             // submitButton2
             // 
-            this.submitButton2.Location = new System.Drawing.Point(294, 7);
+            this.submitButton2.Location = new System.Drawing.Point(312, 25);
+            this.submitButton2.Margin = new System.Windows.Forms.Padding(2);
             this.submitButton2.Name = "submitButton2";
             this.submitButton2.Size = new System.Drawing.Size(75, 23);
             this.submitButton2.TabIndex = 3;
@@ -262,15 +265,16 @@
             // 
             // employeeIdBox2
             // 
-            this.employeeIdBox2.Location = new System.Drawing.Point(163, 6);
+            this.employeeIdBox2.Location = new System.Drawing.Point(165, 27);
+            this.employeeIdBox2.Margin = new System.Windows.Forms.Padding(2);
             this.employeeIdBox2.Name = "employeeIdBox2";
-            this.employeeIdBox2.Size = new System.Drawing.Size(100, 21);
+            this.employeeIdBox2.Size = new System.Drawing.Size(76, 21);
             this.employeeIdBox2.TabIndex = 2;
             // 
             // employeeIdLabel2
             // 
             this.employeeIdLabel2.AutoSize = true;
-            this.employeeIdLabel2.Location = new System.Drawing.Point(54, 16);
+            this.employeeIdLabel2.Location = new System.Drawing.Point(60, 30);
             this.employeeIdLabel2.Name = "employeeIdLabel2";
             this.employeeIdLabel2.Size = new System.Drawing.Size(77, 12);
             this.employeeIdLabel2.TabIndex = 1;
@@ -283,10 +287,11 @@
             this.employeeJobTitle.AllowUserToDeleteRows = false;
             this.employeeJobTitle.AllowUserToOrderColumns = true;
             this.employeeJobTitle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.employeeJobTitle.Location = new System.Drawing.Point(3, 28);
+            this.employeeJobTitle.Location = new System.Drawing.Point(76, 73);
+            this.employeeJobTitle.Margin = new System.Windows.Forms.Padding(2);
             this.employeeJobTitle.Name = "employeeJobTitle";
             this.employeeJobTitle.RowTemplate.Height = 23;
-            this.employeeJobTitle.Size = new System.Drawing.Size(816, 422);
+            this.employeeJobTitle.Size = new System.Drawing.Size(612, 331);
             this.employeeJobTitle.TabIndex = 0;
             this.employeeJobTitle.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.employeeJobTitle.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.employeeJobTitle_CellEndEdit);
@@ -310,10 +315,10 @@
             this.employeeSalary.AllowUserToOrderColumns = true;
             this.employeeSalary.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.employeeSalary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.employeeSalary.Location = new System.Drawing.Point(3, 46);
+            this.employeeSalary.Location = new System.Drawing.Point(4, 8);
             this.employeeSalary.Margin = new System.Windows.Forms.Padding(2);
             this.employeeSalary.Name = "employeeSalary";
-            this.employeeSalary.Size = new System.Drawing.Size(818, 404);
+            this.employeeSalary.Size = new System.Drawing.Size(612, 351);
             this.employeeSalary.TabIndex = 0;
             this.employeeSalary.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.employeeSalary_CellEndEdit);
             // 
@@ -396,7 +401,7 @@
             this.performButton.Location = new System.Drawing.Point(9, 2);
             this.performButton.Margin = new System.Windows.Forms.Padding(2);
             this.performButton.Name = "performButton";
-            this.performButton.Size = new System.Drawing.Size(98, 20);
+            this.performButton.Size = new System.Drawing.Size(148, 25);
             this.performButton.TabIndex = 4;
             this.performButton.Text = "Employ Perform";
             this.performButton.UseVisualStyleBackColor = true;
@@ -407,10 +412,10 @@
             this.jobButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("jobButton.BackgroundImage")));
             this.jobButton.Font = new System.Drawing.Font("STHupo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.jobButton.ForeColor = System.Drawing.Color.White;
-            this.jobButton.Location = new System.Drawing.Point(126, 2);
+            this.jobButton.Location = new System.Drawing.Point(181, 4);
             this.jobButton.Margin = new System.Windows.Forms.Padding(2);
             this.jobButton.Name = "jobButton";
-            this.jobButton.Size = new System.Drawing.Size(98, 20);
+            this.jobButton.Size = new System.Drawing.Size(98, 23);
             this.jobButton.TabIndex = 5;
             this.jobButton.Text = "Job Title";
             this.jobButton.UseVisualStyleBackColor = true;
@@ -421,10 +426,10 @@
             this.salaryButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("salaryButton.BackgroundImage")));
             this.salaryButton.Font = new System.Drawing.Font("STHupo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.salaryButton.ForeColor = System.Drawing.Color.White;
-            this.salaryButton.Location = new System.Drawing.Point(250, 1);
+            this.salaryButton.Location = new System.Drawing.Point(305, 2);
             this.salaryButton.Margin = new System.Windows.Forms.Padding(2);
             this.salaryButton.Name = "salaryButton";
-            this.salaryButton.Size = new System.Drawing.Size(98, 20);
+            this.salaryButton.Size = new System.Drawing.Size(98, 25);
             this.salaryButton.TabIndex = 6;
             this.salaryButton.Text = "Salary";
             this.salaryButton.UseVisualStyleBackColor = true;
@@ -435,10 +440,10 @@
             this.infoButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("infoButton.BackgroundImage")));
             this.infoButton.Font = new System.Drawing.Font("STHupo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.infoButton.ForeColor = System.Drawing.Color.White;
-            this.infoButton.Location = new System.Drawing.Point(364, 1);
+            this.infoButton.Location = new System.Drawing.Point(455, 2);
             this.infoButton.Margin = new System.Windows.Forms.Padding(2);
             this.infoButton.Name = "infoButton";
-            this.infoButton.Size = new System.Drawing.Size(98, 20);
+            this.infoButton.Size = new System.Drawing.Size(98, 25);
             this.infoButton.TabIndex = 7;
             this.infoButton.Text = "Info";
             this.infoButton.UseVisualStyleBackColor = true;
@@ -448,7 +453,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 479);
+            this.ClientSize = new System.Drawing.Size(834, 481);
             this.Controls.Add(this.infoButton);
             this.Controls.Add(this.salaryButton);
             this.Controls.Add(this.jobButton);
