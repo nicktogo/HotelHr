@@ -49,12 +49,12 @@
             this.employeeIdLabel2 = new System.Windows.Forms.Label();
             this.employeeJobTitle = new System.Windows.Forms.DataGridView();
             this.salaryPage = new System.Windows.Forms.TabPage();
+            this.submitButton3 = new System.Windows.Forms.Button();
+            this.employeeIdBox3 = new System.Windows.Forms.TextBox();
             this.employeeSalary = new System.Windows.Forms.DataGridView();
             this.infoPage = new System.Windows.Forms.TabPage();
             this.employeeInfo = new System.Windows.Forms.DataGridView();
             this.showAll2 = new System.Windows.Forms.Button();
-            this.submitButton3 = new System.Windows.Forms.Button();
-            this.employeeIdBox3 = new System.Windows.Forms.TextBox();
             this.employeeIdLabel3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.performButton = new System.Windows.Forms.Button();
@@ -228,7 +228,6 @@
             // 
             // jobPage
             // 
-            this.jobPage.Controls.Add(this.showAll);
             this.jobPage.Controls.Add(this.submitButton2);
             this.jobPage.Controls.Add(this.employeeIdBox2);
             this.jobPage.Controls.Add(this.employeeIdLabel2);
@@ -298,6 +297,9 @@
             // 
             // salaryPage
             // 
+            this.salaryPage.Controls.Add(this.submitButton3);
+            this.salaryPage.Controls.Add(this.employeeIdBox3);
+            this.salaryPage.Controls.Add(this.showAll2);
             this.salaryPage.Controls.Add(this.employeeSalary);
             this.salaryPage.Location = new System.Drawing.Point(4, 22);
             this.salaryPage.Margin = new System.Windows.Forms.Padding(2);
@@ -308,6 +310,23 @@
             this.salaryPage.Text = "Salary";
             this.salaryPage.UseVisualStyleBackColor = true;
             // 
+            // submitButton3
+            // 
+            this.submitButton3.Location = new System.Drawing.Point(298, 25);
+            this.submitButton3.Name = "submitButton3";
+            this.submitButton3.Size = new System.Drawing.Size(75, 23);
+            this.submitButton3.TabIndex = 3;
+            this.submitButton3.Text = "submit";
+            this.submitButton3.UseVisualStyleBackColor = true;
+            this.submitButton3.Click += new System.EventHandler(this.submitButton3_Click);
+            // 
+            // employeeIdBox3
+            // 
+            this.employeeIdBox3.Location = new System.Drawing.Point(125, 27);
+            this.employeeIdBox3.Name = "employeeIdBox3";
+            this.employeeIdBox3.Size = new System.Drawing.Size(100, 21);
+            this.employeeIdBox3.TabIndex = 2;
+            // 
             // employeeSalary
             // 
             this.employeeSalary.AllowUserToAddRows = false;
@@ -315,7 +334,7 @@
             this.employeeSalary.AllowUserToOrderColumns = true;
             this.employeeSalary.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.employeeSalary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.employeeSalary.Location = new System.Drawing.Point(4, 8);
+            this.employeeSalary.Location = new System.Drawing.Point(69, 55);
             this.employeeSalary.Margin = new System.Windows.Forms.Padding(2);
             this.employeeSalary.Name = "employeeSalary";
             this.employeeSalary.Size = new System.Drawing.Size(612, 351);
@@ -354,23 +373,6 @@
             this.showAll2.Text = "show all";
             this.showAll2.UseVisualStyleBackColor = true;
             this.showAll2.Click += new System.EventHandler(this.showAll2_Click);
-            // 
-            // submitButton3
-            // 
-            this.submitButton3.Location = new System.Drawing.Point(313, 27);
-            this.submitButton3.Name = "submitButton3";
-            this.submitButton3.Size = new System.Drawing.Size(75, 23);
-            this.submitButton3.TabIndex = 3;
-            this.submitButton3.Text = "submit";
-            this.submitButton3.UseVisualStyleBackColor = true;
-            this.submitButton3.Click += new System.EventHandler(this.submitButton3_Click);
-            // 
-            // employeeIdBox3
-            // 
-            this.employeeIdBox3.Location = new System.Drawing.Point(189, 27);
-            this.employeeIdBox3.Name = "employeeIdBox3";
-            this.employeeIdBox3.Size = new System.Drawing.Size(100, 21);
-            this.employeeIdBox3.TabIndex = 2;
             // 
             // employeeIdLabel3
             // 
@@ -471,6 +473,7 @@
             this.jobPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeJobTitle)).EndInit();
             this.salaryPage.ResumeLayout(false);
+            this.salaryPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeSalary)).EndInit();
             this.infoPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.employeeInfo)).EndInit();
