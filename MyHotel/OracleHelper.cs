@@ -151,11 +151,13 @@ namespace OracleDBHelper
         //K-
 
         //Info Page
-        public DataTable showEmployeePerform()
+        public DataTable showEmployeeInfo()
         {
             DataTable infoTable;
 
-            cmd.CommandText = "select * from employ";
+            //cmd.CommandText = "select * from employ";
+
+            cmd.CommandText = "select b.behavior_id,reason, e.employ_name, b.be_type FROM behavior b, employ e WHERE b.employ_id = e.employ_id";
 
             OracleDataAdapter adapter = new OracleDataAdapter(cmd);
 
@@ -171,7 +173,7 @@ namespace OracleDBHelper
 
 
 
-        public void closeCon()
+        public void closeConn()
         {
             conn.Dispose();
         }
