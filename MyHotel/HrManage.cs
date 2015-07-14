@@ -83,7 +83,7 @@ namespace HotelHR
             }
         }
 
-        //employeeJobTitle update
+        //employeeSalary update
         private void employeeSalary_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (employeeSalary.Rows.Count > 0)
@@ -125,7 +125,78 @@ namespace HotelHR
 
         }
 
+        private void jobTitleMenuStrip_Opening(object sender, CancelEventArgs e)
+        {
 
+        }
+
+        private void button4_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.button1.FlatAppearance.BorderSize = 1;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.button2.FlatAppearance.BorderSize = 1;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.button3.FlatAppearance.BorderSize = 1;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.employPerform.SelectedIndex = 3;
+        }
+
+        private void button1_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.button4.FlatAppearance.BorderSize = 1;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.button2.FlatAppearance.BorderSize = 1;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.button3.FlatAppearance.BorderSize = 1;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.employPerform.SelectedIndex = 0;
+        }
+
+        private void button2_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.button1.FlatAppearance.BorderSize = 1;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.button4.FlatAppearance.BorderSize = 1;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.button3.FlatAppearance.BorderSize = 1;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.employPerform.SelectedIndex = 1;
+        }
+
+        private void button3_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.button1.FlatAppearance.BorderSize = 1;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.button2.FlatAppearance.BorderSize = 1;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.button4.FlatAppearance.BorderSize = 1;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.employPerform.SelectedIndex = 2;
+        }
         
 
        

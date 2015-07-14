@@ -19,7 +19,7 @@ namespace OracleDBHelper
         {
             //-修改过
             //connectionString = "User id=scott;password=0000;data source=localhost:1521/orcl;";
-            connectionString = "User id=scott;password=tjsselps;data source=221.239.198.134/hotel;";
+            connectionString = "User id=scott;password=tjsselps;data source=221.239.198.134:1521/hotel;";
             //修改过-
             conn = new OracleConnection(connectionString);
             conn.Open();
