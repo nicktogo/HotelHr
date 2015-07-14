@@ -30,6 +30,53 @@ namespace OracleDBHelper
         }
 
         //EmployeePerform Page
+        //updateEmployeePerform(0,2)
+        public bool updateEmployeePerform(int pos, string newData, int behaviorId)
+        {
+            if (pos == 0)
+            {
+                cmd.CommandText = "update behavior set employ_id='" + newData +
+                "' where behavior_id=" + behaviorId;
+            }
+            else if(pos == 2)
+            {
+                cmd.CommandText = "update behavior set reason='" + newData + "' where behavior_id=" + behaviorId;
+            }
+            else
+            {
+                //error
+            }
+
+            if (cmd.ExecuteNonQuery() <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        //updateEmployeePerform(3)
+        public bool updateEmployeePerform(int pos, int newData, int behaviorId)
+        {
+            if (pos == 3)
+            {
+                cmd.CommandText = "update behavior set be_type=" + newData + " where behavior_id=" + behaviorId;
+            }
+            else
+            {
+                //error
+            }
+
+            if (cmd.ExecuteNonQuery() <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         //
         public DataTable showEmployeePerform()
         {
