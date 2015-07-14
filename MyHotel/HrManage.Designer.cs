@@ -43,7 +43,6 @@
             this.employeeIdLabel = new System.Windows.Forms.Label();
             this.employeeIdBox = new System.Windows.Forms.TextBox();
             this.jobPage = new System.Windows.Forms.TabPage();
-            this.showAll = new System.Windows.Forms.Button();
             this.submitButton2 = new System.Windows.Forms.Button();
             this.employeeIdBox2 = new System.Windows.Forms.TextBox();
             this.employeeIdLabel2 = new System.Windows.Forms.Label();
@@ -51,11 +50,12 @@
             this.salaryPage = new System.Windows.Forms.TabPage();
             this.submitButton3 = new System.Windows.Forms.Button();
             this.employeeIdBox3 = new System.Windows.Forms.TextBox();
+            this.showAll2 = new System.Windows.Forms.Button();
             this.employeeSalary = new System.Windows.Forms.DataGridView();
+            this.employeeIdLabel3 = new System.Windows.Forms.Label();
             this.infoPage = new System.Windows.Forms.TabPage();
             this.employeeInfo = new System.Windows.Forms.DataGridView();
-            this.showAll2 = new System.Windows.Forms.Button();
-            this.employeeIdLabel3 = new System.Windows.Forms.Label();
+            this.showAll = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.performButton = new System.Windows.Forms.Button();
             this.jobButton = new System.Windows.Forms.Button();
@@ -241,16 +241,6 @@
             this.jobPage.Text = "Job Title";
             this.jobPage.UseVisualStyleBackColor = true;
             // 
-            // showAll
-            // 
-            this.showAll.Location = new System.Drawing.Point(457, 25);
-            this.showAll.Name = "showAll";
-            this.showAll.Size = new System.Drawing.Size(89, 23);
-            this.showAll.TabIndex = 4;
-            this.showAll.Text = "show all";
-            this.showAll.UseVisualStyleBackColor = true;
-            this.showAll.Click += new System.EventHandler(this.showAll_Click);
-            // 
             // submitButton2
             // 
             this.submitButton2.Location = new System.Drawing.Point(312, 25);
@@ -301,6 +291,7 @@
             this.salaryPage.Controls.Add(this.employeeIdBox3);
             this.salaryPage.Controls.Add(this.showAll2);
             this.salaryPage.Controls.Add(this.employeeSalary);
+            this.salaryPage.Controls.Add(this.employeeIdLabel3);
             this.salaryPage.Location = new System.Drawing.Point(4, 22);
             this.salaryPage.Margin = new System.Windows.Forms.Padding(2);
             this.salaryPage.Name = "salaryPage";
@@ -312,7 +303,7 @@
             // 
             // submitButton3
             // 
-            this.submitButton3.Location = new System.Drawing.Point(298, 25);
+            this.submitButton3.Location = new System.Drawing.Point(423, 25);
             this.submitButton3.Name = "submitButton3";
             this.submitButton3.Size = new System.Drawing.Size(75, 23);
             this.submitButton3.TabIndex = 3;
@@ -322,10 +313,20 @@
             // 
             // employeeIdBox3
             // 
-            this.employeeIdBox3.Location = new System.Drawing.Point(125, 27);
+            this.employeeIdBox3.Location = new System.Drawing.Point(262, 27);
             this.employeeIdBox3.Name = "employeeIdBox3";
             this.employeeIdBox3.Size = new System.Drawing.Size(100, 21);
             this.employeeIdBox3.TabIndex = 2;
+            // 
+            // showAll2
+            // 
+            this.showAll2.Location = new System.Drawing.Point(548, 25);
+            this.showAll2.Name = "showAll2";
+            this.showAll2.Size = new System.Drawing.Size(82, 23);
+            this.showAll2.TabIndex = 4;
+            this.showAll2.Text = "show all";
+            this.showAll2.UseVisualStyleBackColor = true;
+            this.showAll2.Click += new System.EventHandler(this.showAll2_Click);
             // 
             // employeeSalary
             // 
@@ -340,6 +341,15 @@
             this.employeeSalary.Size = new System.Drawing.Size(612, 351);
             this.employeeSalary.TabIndex = 0;
             this.employeeSalary.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.employeeSalary_CellEndEdit);
+            // 
+            // employeeIdLabel3
+            // 
+            this.employeeIdLabel3.AutoSize = true;
+            this.employeeIdLabel3.Location = new System.Drawing.Point(162, 30);
+            this.employeeIdLabel3.Name = "employeeIdLabel3";
+            this.employeeIdLabel3.Size = new System.Drawing.Size(77, 12);
+            this.employeeIdLabel3.TabIndex = 1;
+            this.employeeIdLabel3.Text = "Employee id:";
             // 
             // infoPage
             // 
@@ -364,24 +374,15 @@
             this.employeeInfo.TabIndex = 0;
             this.employeeInfo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.employeeInfo_CellContentClick);
             // 
-            // showAll2
+            // showAll
             // 
-            this.showAll2.Location = new System.Drawing.Point(430, 27);
-            this.showAll2.Name = "showAll2";
-            this.showAll2.Size = new System.Drawing.Size(82, 23);
-            this.showAll2.TabIndex = 4;
-            this.showAll2.Text = "show all";
-            this.showAll2.UseVisualStyleBackColor = true;
-            this.showAll2.Click += new System.EventHandler(this.showAll2_Click);
-            // 
-            // employeeIdLabel3
-            // 
-            this.employeeIdLabel3.AutoSize = true;
-            this.employeeIdLabel3.Location = new System.Drawing.Point(80, 37);
-            this.employeeIdLabel3.Name = "employeeIdLabel3";
-            this.employeeIdLabel3.Size = new System.Drawing.Size(103, 15);
-            this.employeeIdLabel3.TabIndex = 1;
-            this.employeeIdLabel3.Text = "Employee id:";
+            this.showAll.Location = new System.Drawing.Point(457, 25);
+            this.showAll.Name = "showAll";
+            this.showAll.Size = new System.Drawing.Size(89, 23);
+            this.showAll.TabIndex = 4;
+            this.showAll.Text = "show all";
+            this.showAll.UseVisualStyleBackColor = true;
+            this.showAll.Click += new System.EventHandler(this.showAll_Click);
             // 
             // panel1
             // 
