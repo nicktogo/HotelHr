@@ -61,6 +61,21 @@
             this.jobButton = new System.Windows.Forms.Button();
             this.salaryButton = new System.Windows.Forms.Button();
             this.infoButton = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button6 = new System.Windows.Forms.Button();
             this.employPerform.SuspendLayout();
             this.performPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeePerform)).BeginInit();
@@ -73,6 +88,7 @@
             this.infoPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeInfo)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // employPerform
@@ -81,10 +97,12 @@
             this.employPerform.Controls.Add(this.jobPage);
             this.employPerform.Controls.Add(this.salaryPage);
             this.employPerform.Controls.Add(this.infoPage);
-            this.employPerform.Location = new System.Drawing.Point(3, -30);
+            this.employPerform.Controls.Add(this.tabPage1);
+            this.employPerform.Controls.Add(this.tabPage2);
+            this.employPerform.Location = new System.Drawing.Point(3, -29);
             this.employPerform.Name = "employPerform";
             this.employPerform.SelectedIndex = 0;
-            this.employPerform.Size = new System.Drawing.Size(830, 476);
+            this.employPerform.Size = new System.Drawing.Size(830, 475);
             this.employPerform.TabIndex = 2;
             this.employPerform.SelectedIndexChanged += new System.EventHandler(this.employPerform_SelectedIndexChanged);
             this.employPerform.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.employPerform_Selecting);
@@ -107,7 +125,7 @@
             this.performPage.Margin = new System.Windows.Forms.Padding(2);
             this.performPage.Name = "performPage";
             this.performPage.Padding = new System.Windows.Forms.Padding(2);
-            this.performPage.Size = new System.Drawing.Size(822, 450);
+            this.performPage.Size = new System.Drawing.Size(822, 449);
             this.performPage.TabIndex = 0;
             this.performPage.Text = "Employ Perform";
             this.performPage.UseVisualStyleBackColor = true;
@@ -236,7 +254,7 @@
             this.jobPage.Margin = new System.Windows.Forms.Padding(2);
             this.jobPage.Name = "jobPage";
             this.jobPage.Padding = new System.Windows.Forms.Padding(2);
-            this.jobPage.Size = new System.Drawing.Size(822, 450);
+            this.jobPage.Size = new System.Drawing.Size(822, 449);
             this.jobPage.TabIndex = 1;
             this.jobPage.Text = "Job Title";
             this.jobPage.UseVisualStyleBackColor = true;
@@ -296,14 +314,14 @@
             this.salaryPage.Margin = new System.Windows.Forms.Padding(2);
             this.salaryPage.Name = "salaryPage";
             this.salaryPage.Padding = new System.Windows.Forms.Padding(2);
-            this.salaryPage.Size = new System.Drawing.Size(822, 450);
+            this.salaryPage.Size = new System.Drawing.Size(822, 449);
             this.salaryPage.TabIndex = 2;
             this.salaryPage.Text = "Salary";
             this.salaryPage.UseVisualStyleBackColor = true;
             // 
             // submitButton3
             // 
-            this.submitButton3.Location = new System.Drawing.Point(307, 18);
+            this.submitButton3.Location = new System.Drawing.Point(393, 18);
             this.submitButton3.Name = "submitButton3";
             this.submitButton3.Size = new System.Drawing.Size(75, 23);
             this.submitButton3.TabIndex = 3;
@@ -313,14 +331,14 @@
             // 
             // employeeIdBox3
             // 
-            this.employeeIdBox3.Location = new System.Drawing.Point(164, 22);
+            this.employeeIdBox3.Location = new System.Drawing.Point(247, 20);
             this.employeeIdBox3.Name = "employeeIdBox3";
             this.employeeIdBox3.Size = new System.Drawing.Size(100, 21);
             this.employeeIdBox3.TabIndex = 2;
             // 
             // showAll2
             // 
-            this.showAll2.Location = new System.Drawing.Point(415, 18);
+            this.showAll2.Location = new System.Drawing.Point(516, 18);
             this.showAll2.Name = "showAll2";
             this.showAll2.Size = new System.Drawing.Size(82, 23);
             this.showAll2.TabIndex = 4;
@@ -344,7 +362,7 @@
             this.employeeSalary.AllowUserToOrderColumns = true;
             this.employeeSalary.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.employeeSalary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.employeeSalary.Location = new System.Drawing.Point(69, 55);
+            this.employeeSalary.Location = new System.Drawing.Point(70, 64);
             this.employeeSalary.Margin = new System.Windows.Forms.Padding(2);
             this.employeeSalary.Name = "employeeSalary";
             this.employeeSalary.Size = new System.Drawing.Size(612, 351);
@@ -357,7 +375,7 @@
             this.infoPage.Location = new System.Drawing.Point(4, 22);
             this.infoPage.Margin = new System.Windows.Forms.Padding(2);
             this.infoPage.Name = "infoPage";
-            this.infoPage.Size = new System.Drawing.Size(822, 450);
+            this.infoPage.Size = new System.Drawing.Size(822, 449);
             this.infoPage.TabIndex = 3;
             this.infoPage.Text = "Info";
             this.infoPage.UseVisualStyleBackColor = true;
@@ -396,12 +414,9 @@
             // performButton
             // 
             this.performButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("performButton.BackgroundImage")));
-            this.performButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.performButton.FlatAppearance.BorderSize = 0;
-            this.performButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.performButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.performButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.performButton.ForeColor = System.Drawing.Color.White;
-            this.performButton.Location = new System.Drawing.Point(9, 2);
+            this.performButton.Location = new System.Drawing.Point(102, 3);
             this.performButton.Margin = new System.Windows.Forms.Padding(2);
             this.performButton.Name = "performButton";
             this.performButton.Size = new System.Drawing.Size(148, 25);
@@ -413,37 +428,40 @@
             // jobButton
             // 
             this.jobButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("jobButton.BackgroundImage")));
-            this.jobButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.jobButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.jobButton.FlatAppearance.BorderSize = 0;
+            this.jobButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.jobButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.jobButton.ForeColor = System.Drawing.Color.White;
-            this.jobButton.Location = new System.Drawing.Point(181, 4);
+            this.jobButton.Location = new System.Drawing.Point(3, 3);
             this.jobButton.Margin = new System.Windows.Forms.Padding(2);
             this.jobButton.Name = "jobButton";
-            this.jobButton.Size = new System.Drawing.Size(98, 23);
+            this.jobButton.Size = new System.Drawing.Size(98, 25);
             this.jobButton.TabIndex = 5;
-            this.jobButton.Text = "Job Title";
+            this.jobButton.Text = "Comment";
             this.jobButton.UseVisualStyleBackColor = true;
             this.jobButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button2_MouseDown);
             // 
             // salaryButton
             // 
             this.salaryButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("salaryButton.BackgroundImage")));
-            this.salaryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.salaryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.salaryButton.ForeColor = System.Drawing.Color.White;
-            this.salaryButton.Location = new System.Drawing.Point(305, 2);
+            this.salaryButton.Location = new System.Drawing.Point(250, 3);
             this.salaryButton.Margin = new System.Windows.Forms.Padding(2);
             this.salaryButton.Name = "salaryButton";
             this.salaryButton.Size = new System.Drawing.Size(98, 25);
             this.salaryButton.TabIndex = 6;
-            this.salaryButton.Text = "Salary";
+            this.salaryButton.Text = "HR switch";
             this.salaryButton.UseVisualStyleBackColor = true;
             this.salaryButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button3_MouseDown);
             // 
             // infoButton
             // 
             this.infoButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("infoButton.BackgroundImage")));
-            this.infoButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.infoButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.infoButton.ForeColor = System.Drawing.Color.White;
-            this.infoButton.Location = new System.Drawing.Point(455, 2);
+            this.infoButton.Location = new System.Drawing.Point(347, 3);
             this.infoButton.Margin = new System.Windows.Forms.Padding(2);
             this.infoButton.Name = "infoButton";
             this.infoButton.Size = new System.Drawing.Size(98, 25);
@@ -452,18 +470,193 @@
             this.infoButton.UseVisualStyleBackColor = true;
             this.infoButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button4_MouseDown);
             // 
+            // tabPage1
+            // 
+            this.tabPage1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabPage1.BackgroundImage")));
+            this.tabPage1.Controls.Add(this.label9);
+            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.label7);
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(822, 449);
+            this.tabPage1.TabIndex = 4;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.button5.ForeColor = System.Drawing.Color.White;
+            this.button5.Location = new System.Drawing.Point(731, 2);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(98, 25);
+            this.button5.TabIndex = 8;
+            this.button5.Text = "button1";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button5_MouseDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(56, 47);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(123, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Employee id：";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(185, 45);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(115, 21);
+            this.textBox1.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(321, 43);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(57, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "确定";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(60, 121);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 20);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "好评数：";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(181, 121);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(19, 20);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(61, 173);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 20);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "好评率：";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(175, 173);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(34, 20);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "0%";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(60, 228);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 20);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "差评数：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(181, 228);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(19, 20);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(60, 284);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 20);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "好评率：";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(175, 284);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(34, 20);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "0%";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(822, 417);
+            this.tabPage2.TabIndex = 5;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.button6.ForeColor = System.Drawing.Color.White;
+            this.button6.Location = new System.Drawing.Point(445, 3);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(98, 25);
+            this.button6.TabIndex = 9;
+            this.button6.Text = "Pipeline";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button6_MouseDown);
+            // 
             // HrManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 481);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.infoButton);
             this.Controls.Add(this.salaryButton);
             this.Controls.Add(this.jobButton);
             this.Controls.Add(this.performButton);
             this.Controls.Add(this.panel1);
             this.Name = "HrManage";
-            this.Text = "HrManage";
+            this.Text = "HR_Manage";
             this.employPerform.ResumeLayout(false);
             this.performPage.ResumeLayout(false);
             this.performPage.PerformLayout();
@@ -479,6 +672,8 @@
             this.infoPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.employeeInfo)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -517,6 +712,21 @@
         private System.Windows.Forms.Button submitButton3;
         private System.Windows.Forms.Button showAll2;
         private System.Windows.Forms.DataGridView employeePerform;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button button6;
 
         //-K
         
