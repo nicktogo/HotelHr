@@ -120,6 +120,19 @@ namespace OracleDBHelper
             }
         }
 
+        //get the behavior_id of the new record
+        public decimal getBehaviorId()
+        {
+            decimal behaviorId = -1;
+
+            cmd.CommandText = "select count(behavior_id) from behavior";
+
+            behaviorId = (decimal)cmd.ExecuteScalar() + 9;
+
+            return behaviorId;
+
+        }
+
         
 
         //JobTitle Page

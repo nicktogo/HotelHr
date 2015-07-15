@@ -46,44 +46,29 @@ namespace HotelHR
 
         //EmployeePerform Page
         //employeePerform update
-        private void employeePerform_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void employeePerform_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (employeePerform.Rows.Count > 0)
             {
-                
-                //helper.updateEmployeePerform(this.employeePerform.Rows[e.RowIndex].Cells[0].Value.ToString(),
-                //    this.employeePerform.Rows[e.RowIndex].Cells[2].Value.ToString(),
-                //    int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[3].Value.ToString()),
-                //    int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[4].Value.ToString()));
-                if (e.ColumnIndex == 0)
+                int pos = e.ColumnIndex;
+
+                if (e.ColumnIndex == 0 || e.ColumnIndex == 2)
                 {
-                    int pos = 0;
-                    helper.updateEmployeePerform(pos,this.employeePerform.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
-                        int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[4].Value.ToString()));
-                }
-                else if (e.ColumnIndex == 2)
-                {
-                    int pos = 2;
                     helper.updateEmployeePerform(pos, this.employeePerform.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
                         int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[4].Value.ToString()));
                 }
                 else if (e.ColumnIndex == 3)
                 {
-                    int pos = 3;
                     helper.updateEmployeePerform(pos, int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()),
                        int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[4].Value.ToString()));
                 }
+
                 else
                 {
 
                 }
+                employeePerform.DataSource = helper.showEmployeePerform();
             }
-        }
-
-        //bug fixed
-        private void employeePerform_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            employeePerform.DataSource = helper.showEmployeePerform();
         }
 
         //submit a new employee perform
@@ -114,11 +99,39 @@ namespace HotelHR
                     positiveRadio.Checked = false;
 
                     //highlight and top the inserted record 
-
                     //refresh datasource
                     employeePerform.DataSource = helper.showEmployeePerform();
 
-                    //get the index of 
+                    //get the behavior_id of the newest record
+                    decimal behaviorid = helper.getBehaviorId();
+
+                    //get the index of the newest record in DataGridView (using linq)
+                    int index = -1;
+                    DataGridViewRow row = employeePerform.Rows
+                        .Cast<DataGridViewRow>()
+                        .Where(r => decimal.Parse(r.Cells[4].Value.ToString()) == behaviorid)
+                        .First();
+                    index = row.Index;
+
+                    //set it to the first one
+                    employeePerform.FirstDisplayedScrollingRowIndex = index;
+
+                    //highlight
+                    employeePerform.ClearSelection();
+                    employeePerform.Rows[index].Selected = true;
+
+
+                    //
+                    //foreach (DataGridViewRow row in employeePerform.Rows)
+                    //{
+                    //    string value = row.Cells[4].Value.ToString();
+                    //    decimal valueDecimal = decimal.Parse(value);
+
+                    //    if (valueDecimal == behaviorid)
+                    //    {
+                    //        employeePerform.FirstDisplayedScrollingRowIndex = row.Index;
+                    //    }
+                    //}
 
                 }
             }
@@ -176,7 +189,7 @@ namespace HotelHR
 
 
 
-        #region empty method
+        #region empty methods
 
         private void employPerform_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -209,7 +222,7 @@ namespace HotelHR
         }
         #endregion
 
-        #region method to be executed when tab-button MouseDown event occur
+        #region methods to be executed when tab-button MouseDown event occur
         private void button4_MouseDown(object sender, MouseEventArgs e)
         {
             this.infoButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -278,6 +291,8 @@ namespace HotelHR
             this.employPerform.SelectedIndex = 2;
         }
         #endregion
+
+
 
     }
 }

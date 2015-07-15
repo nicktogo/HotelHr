@@ -123,7 +123,7 @@
             this.employeePerform.RowTemplate.Height = 27;
             this.employeePerform.Size = new System.Drawing.Size(305, 446);
             this.employeePerform.TabIndex = 11;
-            this.employeePerform.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.employeePerform_CellEndEdit);
+            this.employeePerform.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.employeePerform_CellValueChanged);
             // 
             // pictureBox2
             // 
