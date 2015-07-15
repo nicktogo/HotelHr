@@ -242,10 +242,127 @@ namespace OracleDBHelper
         }
 
         //Info Page
+        //update(1,2,3,4,5,7,8)
+        public bool updateEmployeeInfo(int pos, string employeeId, string newData)
+        {
+            switch (pos)
+            {
+                case 1:
+                    cmd.CommandText = "update employ set EMPLOY_NAME='" + newData + "' where employ_id=" + employeeId;
+                    break;
+                case 2:
+                    cmd.CommandText = "update employ set GENDER='" + newData + "' where employ_id=" + employeeId;
+                    break;
+                case 3:
+                    cmd.CommandText = "update employ set ADDRESS='" + newData + "' where employ_id=" + employeeId;
+                    break;
+                case 4:
+                    cmd.CommandText = "update employ set CITIZEN_ID='" + newData + "' where employ_id=" + employeeId;
+                    break;
+                case 5:
+                    string[] _newData = newData.Split(' ');
+                    string[] date = _newData[0].Split('/');
+                    string _date = date[2] + "-" + date[1] + "月-" + date[0].Substring(2, 2);
+                    cmd.CommandText = "update employ set IN_DATE='" + _date + "' where employ_id=" + employeeId;
+                    break;
+                case 7:
+                    cmd.CommandText = "update employ set STATUS='" + newData + "' where employ_id=" + employeeId;
+                    break;
+                case 8:
+                    cmd.CommandText = "update employ set PASSWORD='" + newData + "' where employ_id=" + employeeId;
+                    break;
+            }
+            
+            if (cmd.ExecuteNonQuery() <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        //update(6)
+        public bool updateEmployeeInfo(int pos, string employeeId, int newData)
+        {
+            cmd.CommandText = "update employ set WORK_YEAR='" + newData + "' where employ_id=" + employeeId;
+
+            if (cmd.ExecuteNonQuery() <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        //
+        public DataTable getAllEmployeeId()
+        {
+            DataTable allEmployeeId;
+
+            cmd.CommandText = "select employ_id from employ";
+
+            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
+
+            DataSet dataSet = new DataSet();
+
+            adapter.Fill(dataSet);
+
+            allEmployeeId = dataSet.Tables[0];
+
+            return allEmployeeId;
+        }
+        //
+        public bool deleteEmployeeInfo(string employeeId)
+        {
+            cmd.CommandText = "delete from employ where EMPLOY_ID='" + employeeId + "'";
+
+            if (cmd.ExecuteNonQuery() <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        //
+        public bool insertEmployeeInfo(string employeeId, string employeeName, string gender, string address, string citizenId, string inDate, int workYear, string status, string password)
+        {
+            string[] date = inDate.Split('/');
+            string _inDate =  date[2] +"-"+ date[1] +"月-"+  date[0].Substring(2,2);
+            
+
+            cmd.CommandText = "insert into employ(EMPLOY_ID,EMPLOY_NAME,GENDER,ADDRESS,CITIZEN_ID,IN_DATE,WORK_YEAR,STATUS,PASSWORD)"
+                +"values('"+ employeeId +"','"+ employeeName +"','"+ gender +"','"+ address +"','"+ citizenId +"','"+ _inDate +"',"+ workYear +",'"+ status +"','"+ password +"')";
+
+            if (cmd.ExecuteNonQuery() <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        //insert check employeeId
+        //public bool isEmployeeIdExist(string employeeId)
+        //{
+        //    cmd.CommandText = "select employ_id from employ where employ_id ='" + employeeId + "'";
+        //    if (cmd.ExecuteScalar() == null)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }    
+        //}
+        //showEmployeeInfo
         public DataTable showEmployeeInfo()
         {
             DataTable infoTable;
-
 
            cmd.CommandText = "select * from employ";
 
