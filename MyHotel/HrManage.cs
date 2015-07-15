@@ -77,11 +77,16 @@ namespace HotelHR
                 {
 
                 }
-                employeePerform.DataSource = helper.showEmployeePerform();   
             }
         }
 
-        //submit a employee perform
+        //bug fixed
+        private void employeePerform_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            employeePerform.DataSource = helper.showEmployeePerform();
+        }
+
+        //submit a new employee perform
         private void submitButton_Click(object sender, EventArgs e)
         {
 
@@ -107,6 +112,14 @@ namespace HotelHR
                     reasonBox.Text = "";
                     nagetiveRadio.Checked = false;
                     positiveRadio.Checked = false;
+
+                    //highlight and top the inserted record 
+
+                    //refresh datasource
+                    employeePerform.DataSource = helper.showEmployeePerform();
+
+                    //get the index of 
+
                 }
             }
             else
@@ -114,6 +127,8 @@ namespace HotelHR
 
             }
         }
+
+
 
         //JobTitle Page
         //
@@ -161,16 +176,7 @@ namespace HotelHR
 
 
 
-
-        private void promoteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
+        #region empty method
 
         private void employPerform_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -181,6 +187,7 @@ namespace HotelHR
         {
 
         }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -190,15 +197,19 @@ namespace HotelHR
         {
 
         }
+
         private void jobTitleMenuStrip_Opening(object sender, CancelEventArgs e)
         {
 
         }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
+        #endregion
 
+        #region method to be executed when tab-button MouseDown event occur
         private void button4_MouseDown(object sender, MouseEventArgs e)
         {
             this.infoButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -214,11 +225,6 @@ namespace HotelHR
             this.salaryButton.FlatAppearance.BorderSize = 1;
             this.salaryButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.employPerform.SelectedIndex = 3;
-        }
-
-        private void employeeIdBox_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_MouseDown(object sender, MouseEventArgs e)
@@ -271,27 +277,7 @@ namespace HotelHR
             this.infoButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.employPerform.SelectedIndex = 2;
         }
+        #endregion
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void employeeIdLabel3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void employeePerform_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        
-        
-
-       
-        
-        //K-
     }
 }
