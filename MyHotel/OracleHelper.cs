@@ -29,7 +29,41 @@ namespace OracleDBHelper
             cmd.CommandType = CommandType.Text;
         }
 
-        //EmployeePerform Page
+        //Perform Page
+        public int getFavourableReviewCountByEmployId(string employId)
+        {
+            DataTable Perform;
+
+            cmd.CommandText = "select count(be_type) from behavior where employ_id='" +employId+ "' and be_type = 1";
+
+            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
+
+            DataSet dataSet = new DataSet();
+
+            adapter.Fill(dataSet);
+
+            Perform = dataSet.Tables[0];
+
+            return int.Parse(Perform.Rows[0][0].ToString());
+        }
+        public int getNegativeReviewCountByEmployId(string employId)
+        {
+            DataTable Perform;
+
+            cmd.CommandText = "select count(be_type) from behavior where employ_id='" + employId + "' and be_type = -1";
+
+            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
+
+            DataSet dataSet = new DataSet();
+
+            adapter.Fill(dataSet);
+
+            Perform = dataSet.Tables[0];
+
+            return int.Parse(Perform.Rows[0][0].ToString());
+        }
+
+        //Comment Page
         //updateEmployeePerform(0,2)
         public bool updateEmployeePerform(int pos, string newData, int behaviorId)
         {
@@ -135,7 +169,7 @@ namespace OracleDBHelper
 
         
 
-        //JobTitle Page
+        //JobTitle Page(无效)
         //SearchJobTitle
         public DataTable searchJobTitle(string employeeId)
         {
@@ -155,10 +189,18 @@ namespace OracleDBHelper
         }
 
         //UpdateEmployeeJobTitle
-        public bool updateEmployeeJobTitle(string employeeId,string newPosition)
+        public bool updateEmployeeJobTitle(int pos, string employeeId, string newData)
         {
-            cmd.CommandText = "update works set position='" + newPosition + "' where employ_id=" + employeeId;
-            
+            switch (pos)
+            {
+                case 2:
+                    cmd.CommandText = "update works set position='" + newData + "' where employ_id=" + employeeId;
+                    break;
+                case 3:
+                    cmd.CommandText = "update works set salary='" + newData + "' where employ_id=" + employeeId;
+                    break;
+            }
+
             if (cmd.ExecuteNonQuery() <= 0)
             {
                 return false;
@@ -173,7 +215,7 @@ namespace OracleDBHelper
         {
             DataTable JobTitleTable;
 
-            cmd.CommandText = "select e.employ_id,employ_name,position " +
+            cmd.CommandText = "select e.employ_id,employ_name,position,salary " +
                "from employ e,works w " +
                "where e.employ_id=w.employ_id";
 
@@ -188,13 +230,28 @@ namespace OracleDBHelper
             return JobTitleTable;
         }
 
-        //Salary Page
-        //SearchSalary
-        public DataTable searchSalary(string employeeId)
+        //Salary (HRSwitch) Page
+        public bool HRSwitchSalaryChange(string position, int salaryChanged)
         {
-            DataTable SearchSalaryTable;
+            //cmd.CommandText = "update works set position='" + newData + "' where employ_id=" + employeeId;
+            cmd.CommandText = "update works set salary=salary+" + salaryChanged + " where position='" + position + "'";
 
-            cmd.CommandText = "select e.employ_id,employ_name,salary from employ e,works w where e.employ_id = w.employ_id and e.employ_id ='" + employeeId + "'";
+            if (cmd.ExecuteNonQuery() <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        //searchHRSwitch
+        public DataTable searchHRSwitch(string employeeId)
+        {
+            DataTable searchHRSwitchTable;
+
+            cmd.CommandText = "select e.employ_id,employ_name,position,salary from employ e,works w where e.employ_id = w.employ_id and e.employ_id ='" + employeeId + "'";
 
             OracleDataAdapter adapter = new OracleDataAdapter(cmd);
 
@@ -202,15 +259,31 @@ namespace OracleDBHelper
 
             adapter.Fill(dataSet);
 
-            SearchSalaryTable = dataSet.Tables[0];
+            searchHRSwitchTable = dataSet.Tables[0];
 
-            return SearchSalaryTable;
+            return searchHRSwitchTable;
         }
 
-        //UpdateEmployeeSalary
-        public bool updateEmployeeSalary(string employeeId, int newSalary)
+        //UpdateHRSwitch(string)
+        public bool updateHRSwitch(string employeeId, string newData)
         {
-            cmd.CommandText = "update works set salary=" + newSalary + "  where employ_id=" + employeeId;
+
+            cmd.CommandText = "update works set position='" + newData + "' where employ_id=" + employeeId;
+
+            if (cmd.ExecuteNonQuery() <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        //UpdateHRSwitch(int)
+        public bool updateHRSwitch(string employeeId, int newData)
+        {
+
+            cmd.CommandText = "update works set salary='" + newData + "' where employ_id=" + employeeId;
 
             if (cmd.ExecuteNonQuery() <= 0)
             {
@@ -226,9 +299,9 @@ namespace OracleDBHelper
         {
             DataTable SalaryTable;
 
-            cmd.CommandText = "select e.employ_id,employ_name,salary " +
-                "from employ e,works w " +
-                "where e.employ_id=w.employ_id";
+            cmd.CommandText = "select e.employ_id,employ_name,position,salary " +
+               "from employ e,works w " +
+               "where e.employ_id=w.employ_id";
 
             OracleDataAdapter adapter = new OracleDataAdapter(cmd);
 

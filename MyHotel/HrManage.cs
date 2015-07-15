@@ -35,9 +35,9 @@ namespace HotelHR
             employeeJobTitle.Columns[0].ReadOnly = true;
             employeeJobTitle.Columns[1].ReadOnly = true;
 
-            employeeSalary.DataSource = helper.showEmployeeSalary();
-            employeeSalary.Columns[0].ReadOnly = true;
-            employeeSalary.Columns[1].ReadOnly = true;
+            employeeHRSwitch.DataSource = helper.showEmployeeSalary();
+            employeeHRSwitch.Columns[0].ReadOnly = true;
+            employeeHRSwitch.Columns[1].ReadOnly = true;
 
             employeeInfo.DataSource = helper.showEmployeeInfo();
             employeeInfo.Columns[0].ReadOnly = true;
@@ -45,6 +45,18 @@ namespace HotelHR
         }
 
         //EmployeePerform Page
+        private void btn_performSubmit_Click(object sender, EventArgs e)
+        {
+            //DataTable perform = helper.getPerformByEmployId(tb_performEmployId.Text);
+            int favourableReviewCount = helper.getFavourableReviewCountByEmployId(tb_performEmployId.Text);
+            int negetiveReviewCount = helper.getNegativeReviewCountByEmployId(tb_performEmployId.Text);
+            l_performFavourableReviewCountData.Text = favourableReviewCount.ToString();
+            l_performFavourableReviewRateData.Text = ((((float)favourableReviewCount) / ((float)(favourableReviewCount + negetiveReviewCount))) * 100).ToString("F2") + "%";
+            l_performNegativeReviewCountData.Text = negetiveReviewCount.ToString();
+            l_performNegativeReviewRateData.Text = ((((float)negetiveReviewCount) / ((float)(favourableReviewCount + negetiveReviewCount))) * 100).ToString("F2") + "%";
+        }
+
+        //Comment Page
         //employeePerform update
         private void employeePerform_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -143,7 +155,7 @@ namespace HotelHR
 
 
 
-        //JobTitle Page
+        //JobTitle Page(无效)
         //
         private void showAll_Click(object sender, EventArgs e)
         {
@@ -157,33 +169,90 @@ namespace HotelHR
         }
 
         //employeeJobTitle update
-        private void employeeJobTitle_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void employeeJobTitle_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if(employeeJobTitle.Rows.Count > 0)
+            var result = MessageBox.Show("Sure to submit?", "", MessageBoxButtons.YesNo);
+
+            //confirm to submit
+            if (result == DialogResult.Yes)
             {
-                helper.updateEmployeeJobTitle(this.employeeJobTitle.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeJobTitle.Rows[e.RowIndex].Cells[2].Value.ToString());   
+                if (employeeJobTitle.Rows.Count > 0)
+                {
+                    switch (e.ColumnIndex)
+                    {
+                        case 2:
+                            //helper.updateEmployeeJobTitle(e.ColumnIndex, this.employeeJobTitle.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeJobTitle.Rows[e.RowIndex].Cells[2].Value.ToString());
+                            helper.updateEmployeeJobTitle(e.ColumnIndex, this.employeeJobTitle.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeJobTitle.Rows[e.RowIndex].Cells[2].Value.ToString());
+                            break;
+                        case 3:
+                            helper.updateEmployeeJobTitle(e.ColumnIndex, this.employeeJobTitle.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeJobTitle.Rows[e.RowIndex].Cells[3].Value.ToString());
+                            break;
+                    }
+                }
+                employeeJobTitle.DataSource = helper.showEmployeeJobTitle();
+            }
+            else
+            {
+                employeeJobTitle.DataSource = helper.showEmployeeJobTitle();
             }
         }
 
 
-        //Salary Page
-        //
+        //Salary Page(HR Switch Page)
+        private void btn_HRSwitchSubmit_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Sure to submit?", "", MessageBoxButtons.YesNo);
+
+            //confirm to submit
+            if (result == DialogResult.Yes)
+            {
+                if (employeeHRSwitch.Rows.Count > 0)
+                {
+                    helper.HRSwitchSalaryChange(cb_HRSwitchPosition.Text, int.Parse(tb_HRSwitchSalaryChange.Text));
+                }
+                employeeHRSwitch.DataSource = helper.showEmployeeSalary();
+            }
+            else
+            {
+                employeeHRSwitch.DataSource = helper.showEmployeeSalary();
+            }
+        }
+        //showAll
         private void showAll2_Click(object sender, EventArgs e)
         {
-            employeeSalary.DataSource = helper.showEmployeeSalary();
+            employeeHRSwitch.DataSource = helper.showEmployeeSalary();
         }
-        //submitButton3_Click
+        //search
         private void submitButton3_Click(object sender, EventArgs e)
         {
-            employeeSalary.DataSource = helper.searchSalary(employeeIdBox3.Text);
+            employeeHRSwitch.DataSource = helper.searchHRSwitch(employeeIdBox3.Text);
         }
 
         //employeeSalary update
-        private void employeeSalary_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void employeeSalary_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (employeeSalary.Rows.Count > 0)
+            var result = MessageBox.Show("Sure to submit?", "", MessageBoxButtons.YesNo);
+
+            //confirm to submit
+            if (result == DialogResult.Yes)
             {
-                helper.updateEmployeeSalary(this.employeeSalary.Rows[e.RowIndex].Cells[0].Value.ToString(), int.Parse(this.employeeSalary.Rows[e.RowIndex].Cells[2].Value.ToString()));
+                if (employeeHRSwitch.Rows.Count > 0)
+                {
+                    switch (e.ColumnIndex)
+                    {
+                        case 2:
+                            helper.updateHRSwitch(this.employeeHRSwitch.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeHRSwitch.Rows[e.RowIndex].Cells[2].Value.ToString());
+                            break;
+                        case 3:
+                            helper.updateHRSwitch(this.employeeHRSwitch.Rows[e.RowIndex].Cells[0].Value.ToString(), int.Parse(this.employeeHRSwitch.Rows[e.RowIndex].Cells[3].Value.ToString()));
+                            break;
+                    }
+                }
+                employeeHRSwitch.DataSource = helper.showEmployeeSalary();
+            }
+            else
+            {
+                employeeHRSwitch.DataSource = helper.showEmployeeSalary();
             }
         }
 
@@ -376,93 +445,93 @@ namespace HotelHR
         #region methods to be executed when tab-button MouseDown event occur
         private void button4_MouseDown(object sender, MouseEventArgs e)
         {
-            this.infoButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.infoButton.FlatAppearance.BorderSize = 0;
-            this.infoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.performButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.performButton.FlatAppearance.BorderSize = 1;
-            this.performButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.jobButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.jobButton.FlatAppearance.BorderSize = 1;
-            this.jobButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.salaryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.salaryButton.FlatAppearance.BorderSize = 1;
-            this.salaryButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_info.FlatAppearance.BorderSize = 0;
+            this.btn_info.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_perform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_perform.FlatAppearance.BorderSize = 1;
+            this.btn_perform.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_comment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_comment.FlatAppearance.BorderSize = 1;
+            this.btn_comment.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_HRSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_HRSwitch.FlatAppearance.BorderSize = 1;
+            this.btn_HRSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
             this.button5.FlatAppearance.BorderSize = 1;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.button6.FlatAppearance.BorderSize = 1;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_pipeline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_pipeline.FlatAppearance.BorderSize = 1;
+            this.btn_pipeline.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.employPerform.SelectedIndex = 3;
         }
 
         private void button1_MouseDown(object sender, MouseEventArgs e)
         {
-            this.performButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.performButton.FlatAppearance.BorderSize = 0;
-            this.performButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.infoButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.infoButton.FlatAppearance.BorderSize = 1;
-            this.infoButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.jobButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.jobButton.FlatAppearance.BorderSize = 1;
-            this.jobButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.salaryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.salaryButton.FlatAppearance.BorderSize = 1;
-            this.salaryButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_perform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_perform.FlatAppearance.BorderSize = 0;
+            this.btn_perform.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_info.FlatAppearance.BorderSize = 1;
+            this.btn_info.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_comment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_comment.FlatAppearance.BorderSize = 1;
+            this.btn_comment.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_HRSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_HRSwitch.FlatAppearance.BorderSize = 1;
+            this.btn_HRSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
             this.button5.FlatAppearance.BorderSize = 1;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.button6.FlatAppearance.BorderSize = 1;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_pipeline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_pipeline.FlatAppearance.BorderSize = 1;
+            this.btn_pipeline.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.employPerform.SelectedIndex = 4;
         }
 
         private void button2_MouseDown(object sender, MouseEventArgs e)
         {
-            this.jobButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.jobButton.FlatAppearance.BorderSize = 0;
-            this.jobButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.performButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.performButton.FlatAppearance.BorderSize = 1;
-            this.performButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.infoButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.infoButton.FlatAppearance.BorderSize = 1;
-            this.infoButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.salaryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.salaryButton.FlatAppearance.BorderSize = 1;
-            this.salaryButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_comment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_comment.FlatAppearance.BorderSize = 0;
+            this.btn_comment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_perform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_perform.FlatAppearance.BorderSize = 1;
+            this.btn_perform.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_info.FlatAppearance.BorderSize = 1;
+            this.btn_info.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_HRSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_HRSwitch.FlatAppearance.BorderSize = 1;
+            this.btn_HRSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
             this.button5.FlatAppearance.BorderSize = 1;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.button6.FlatAppearance.BorderSize = 1;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_pipeline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_pipeline.FlatAppearance.BorderSize = 1;
+            this.btn_pipeline.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.employPerform.SelectedIndex = 0;
         }
 
         private void button3_MouseDown(object sender, MouseEventArgs e)
         {
-            this.salaryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.salaryButton.FlatAppearance.BorderSize = 0;
-            this.salaryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.performButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.performButton.FlatAppearance.BorderSize = 1;
-            this.performButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.jobButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.jobButton.FlatAppearance.BorderSize = 1;
-            this.jobButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.infoButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.infoButton.FlatAppearance.BorderSize = 1;
-            this.infoButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_HRSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_HRSwitch.FlatAppearance.BorderSize = 0;
+            this.btn_HRSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_perform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_perform.FlatAppearance.BorderSize = 1;
+            this.btn_perform.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_comment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_comment.FlatAppearance.BorderSize = 1;
+            this.btn_comment.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_info.FlatAppearance.BorderSize = 1;
+            this.btn_info.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
             this.button5.FlatAppearance.BorderSize = 1;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.button6.FlatAppearance.BorderSize = 1;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_pipeline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_pipeline.FlatAppearance.BorderSize = 1;
+            this.btn_pipeline.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.employPerform.SelectedIndex = 2;
         }
         
@@ -472,21 +541,21 @@ namespace HotelHR
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.salaryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.salaryButton.FlatAppearance.BorderSize = 1;
-            this.salaryButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.performButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.performButton.FlatAppearance.BorderSize = 1;
-            this.performButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.jobButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.jobButton.FlatAppearance.BorderSize = 1;
-            this.jobButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.infoButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.infoButton.FlatAppearance.BorderSize = 1;
-            this.infoButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.button6.FlatAppearance.BorderSize = 1;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_HRSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_HRSwitch.FlatAppearance.BorderSize = 1;
+            this.btn_HRSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_perform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_perform.FlatAppearance.BorderSize = 1;
+            this.btn_perform.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_comment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_comment.FlatAppearance.BorderSize = 1;
+            this.btn_comment.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_info.FlatAppearance.BorderSize = 1;
+            this.btn_info.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_pipeline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_pipeline.FlatAppearance.BorderSize = 1;
+            this.btn_pipeline.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.employPerform.SelectedIndex = 1;
         }
        
@@ -495,28 +564,32 @@ namespace HotelHR
 
         private void button6_MouseDown(object sender, MouseEventArgs e)
         {
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_pipeline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_pipeline.FlatAppearance.BorderSize = 0;
+            this.btn_pipeline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
             this.button5.FlatAppearance.BorderSize = 1;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.salaryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.salaryButton.FlatAppearance.BorderSize = 1;
-            this.salaryButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.performButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.performButton.FlatAppearance.BorderSize = 1;
-            this.performButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.jobButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.jobButton.FlatAppearance.BorderSize = 1;
-            this.jobButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.infoButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.infoButton.FlatAppearance.BorderSize = 1;
-            this.infoButton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_HRSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_HRSwitch.FlatAppearance.BorderSize = 1;
+            this.btn_HRSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_perform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_perform.FlatAppearance.BorderSize = 1;
+            this.btn_perform.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_comment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_comment.FlatAppearance.BorderSize = 1;
+            this.btn_comment.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_info.FlatAppearance.BorderSize = 1;
+            this.btn_info.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.employPerform.SelectedIndex = 5;
         }
 
  #endregion
+
+        
+
+        
 
 
 
