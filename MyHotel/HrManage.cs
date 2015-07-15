@@ -40,7 +40,7 @@ namespace HotelHR
             employeeSalary.Columns[1].ReadOnly = true;
 
             employeeInfo.DataSource = helper.showEmployeeInfo();
-            //employeeInfo.Columns[7].Visible = false;
+            employeeInfo.Columns[0].ReadOnly = true;
             
         }
 
@@ -187,7 +187,158 @@ namespace HotelHR
             }
         }
 
+        //employeeInfo Page
+        //update
+        private void employeeInfo_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            var result = MessageBox.Show("Sure to submit?", "",MessageBoxButtons.YesNo);
 
+            //confirm to submit
+            if (result == DialogResult.Yes)
+            {
+                if (employeeInfo.Rows.Count > 0)
+                {
+                    switch (e.ColumnIndex)
+                    {
+                        case 1: helper.updateEmployeeInfo(e.ColumnIndex, this.employeeInfo.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeInfo.Rows[e.RowIndex].Cells[1].Value.ToString()); break;
+                        case 2: helper.updateEmployeeInfo(e.ColumnIndex, this.employeeInfo.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeInfo.Rows[e.RowIndex].Cells[2].Value.ToString()); break;
+                        case 3: helper.updateEmployeeInfo(e.ColumnIndex, this.employeeInfo.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeInfo.Rows[e.RowIndex].Cells[3].Value.ToString()); break;
+                        case 4: helper.updateEmployeeInfo(e.ColumnIndex, this.employeeInfo.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeInfo.Rows[e.RowIndex].Cells[4].Value.ToString()); break;
+                        case 5: helper.updateEmployeeInfo(e.ColumnIndex, this.employeeInfo.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeInfo.Rows[e.RowIndex].Cells[5].Value.ToString()); break;
+                        case 6: helper.updateEmployeeInfo(e.ColumnIndex, this.employeeInfo.Rows[e.RowIndex].Cells[0].Value.ToString(), int.Parse(this.employeeInfo.Rows[e.RowIndex].Cells[6].Value.ToString())); break;
+                        case 7: helper.updateEmployeeInfo(e.ColumnIndex, this.employeeInfo.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeInfo.Rows[e.RowIndex].Cells[7].Value.ToString()); break;
+                        case 8: helper.updateEmployeeInfo(e.ColumnIndex, this.employeeInfo.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeInfo.Rows[e.RowIndex].Cells[8].Value.ToString()); break;
+                    }
+                }
+                employeeInfo.DataSource = helper.showEmployeeInfo();
+            }
+            else
+            {
+                employeeInfo.DataSource = helper.showEmployeeInfo();
+            }
+        }
+        //delete
+        private void btn_infoDelete_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Sure to submit?", "", MessageBoxButtons.YesNo);
+
+            //confirm to submit
+            if (result == DialogResult.Yes)
+            {
+                if (helper.deleteEmployeeInfo(tb_infoEMPLOY_ID2.Text))
+                {
+                    MessageBox.Show("Success!");
+                    tb_infoEMPLOY_ID2.Text = "";
+                    employeeInfo.DataSource = helper.showEmployeeInfo();
+                }
+                else
+                {
+                    MessageBox.Show("Failed!");
+                }
+            }
+        }
+        //new
+        private void btn_newInfo_Click(object sender, EventArgs e)
+        {
+            bool isExist = false;
+            var result = MessageBox.Show("Sure to submit?", "", MessageBoxButtons.YesNo);
+
+
+            //confirm to submit
+            if (result == DialogResult.Yes)
+            {
+                DataTable allEmployeeId = helper.getAllEmployeeId();
+                for (int i = 0; i < allEmployeeId.Rows.Count; i++)
+                {
+                    if (tb_infoEMPLOY_ID.Text.Equals(allEmployeeId.Rows[i][0].ToString()))
+                    {
+                        isExist = true;
+                    }
+                }
+
+                if (!isExist && helper.insertEmployeeInfo(tb_infoEMPLOY_ID.Text, tb_infoEMPLOY_NAME.Text, tb_infoGENDER.Text, tb_infoADDRESS.Text,
+                    tb_infoCITIZEN_ID.Text, tb_infoIN_DATE.Text, int.Parse(tb_infoWORK_YEAR.Text), tb_infoSTATUS.Text, tb_infoPASSWORD.Text))
+                {
+                    MessageBox.Show("Success!");
+                    tb_infoEMPLOY_ID.Text = "";
+                    tb_infoEMPLOY_NAME.Text = "";
+                    tb_infoGENDER.Text = "";
+                    tb_infoADDRESS.Text = "";
+                    tb_infoCITIZEN_ID.Text = "";
+                    tb_infoIN_DATE.Text = "";
+                    tb_infoWORK_YEAR.Text = "";
+                    tb_infoSTATUS.Text = "";
+                    tb_infoPASSWORD.Text = "";
+                    employeeInfo.DataSource = helper.showEmployeeInfo();
+                }
+                else
+                {
+                    MessageBox.Show("Failed!");
+                }
+            }
+        }
+        //private void submitButton_Click(object sender, EventArgs e)
+        //{
+
+        //    var result = MessageBox.Show("Sure to submit?", "", MessageBoxButtons.YesNo);
+
+        //    //confirm to submit
+        //    if (result == DialogResult.Yes)
+        //    {
+        //        if (helper.insertEmployeePerform(employeeIdBox.Text, reasonBox.Text, type))
+        //        {
+        //            MessageBox.Show("Success!");
+        //            employeeIdBox.Text = "";
+        //            reasonBox.Text = "";
+        //            nagetiveRadio.Checked = false;
+        //            positiveRadio.Checked = false;
+
+        //            //highlight and top the inserted record 
+
+        //            //refresh datasource
+        //            employeePerform.DataSource = helper.showEmployeePerform();
+
+        //            //get the index of 
+
+        //        }
+        //    }
+        //    else
+        //    {
+
+        //    }
+        //}
+        //employeeInfo insert
+        //private void employeeInfo_AllowUserToAddRowsChanged(object sender, EventArgs e)
+        //{
+        //    MessageBox.Show("failed");
+        //    if (!helper.isEmployeeIdExist(this.employeeInfo.Rows[((DataGridViewCellEventArgs)e).RowIndex].Cells[0].Value.ToString()))
+        //    //if (!helper.isEmployeeIdExist(this.employeeInfo.Columns)
+        //    {
+                
+        //    }
+        //    else
+        //    { 
+        //        MessageBox.Show("failed");
+        //    }
+            
+        //}
+        //private void employeeInfo_RowLeave(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if(this.employeeInfo.RowCount - 1 == e.RowIndex)
+        //    {
+        //        if (!helper.isEmployeeIdExist(this.employeeInfo.Rows[e.RowIndex].Cells[0].Value.ToString()))
+        //        {
+
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("failed");
+        //        }
+        //    }
+            
+
+        //}
 
         #region empty methods
 
@@ -291,8 +442,6 @@ namespace HotelHR
             this.employPerform.SelectedIndex = 2;
         }
         #endregion
-
-
 
     }
 }
