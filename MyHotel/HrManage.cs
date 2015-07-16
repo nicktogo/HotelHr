@@ -22,19 +22,43 @@ namespace HotelHR
         {
             InitializeComponent();
             helper = new OracleHelper();
-            employeePerform.DataSource = helper.showEmployeePerform();
-            employeePerform.Columns[1].ReadOnly = true;
-            employeePerform.Columns[4].Visible = false;
+            employeeComment.DataSource = helper.showEmployeePerform();
+            employeeComment.Columns[1].ReadOnly = true;
+            employeeComment.Columns[4].Visible = false;
+
+
+            bool isLatest = true;
+            string[] dateNow = System.DateTime.Now.ToShortDateString().ToString().Split('/');
+            DataTable allSalaryTypeAccountTime = helper.getAllSalaryTypeAccountTime();
+            for (int i = 0; i < allSalaryTypeAccountTime.Rows.Count; i++)
+            {
+                string[] dateExist = allSalaryTypeAccountTime.Rows[i][0].ToString().Split('/');
+
+                if (int.Parse(dateNow[0]) < int.Parse(dateExist[0]))
+                {
+                    isLatest = false;
+                    break;
+                }
+                else if (int.Parse(dateNow[0]) == int.Parse(dateExist[0]) && int.Parse(dateNow[1]) <= int.Parse(dateExist[1]))
+                {
+                    isLatest = false;
+                    break;
+                }
+                else
+                {
+                    //isLatest
+                }
+            }
+            if (isLatest == true)
+            {
+                helper.newSalaryTypeAccount(helper.getSalarySum(), System.DateTime.Now.ToLocalTime().ToString());
+            }
         }
 
         //Page Control
-        //show employee info
+        //employPerform_Selecting
         private void employPerform_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            employeeJobTitle.DataSource = helper.showEmployeeJobTitle();
-            employeeJobTitle.Columns[0].ReadOnly = true;
-            employeeJobTitle.Columns[1].ReadOnly = true;
-
             employeeHRSwitch.DataSource = helper.showEmployeeSalary();
             employeeHRSwitch.Columns[0].ReadOnly = true;
             employeeHRSwitch.Columns[1].ReadOnly = true;
@@ -44,161 +68,159 @@ namespace HotelHR
             
         }
 
+        //------------------------------------------------
+
         //EmployeePerform Page
         private void btn_performSubmit_Click(object sender, EventArgs e)
         {
-            //DataTable perform = helper.getPerformByEmployId(tb_performEmployId.Text);
-            int favourableReviewCount = helper.getFavourableReviewCountByEmployId(tb_performEmployId.Text);
-            int negetiveReviewCount = helper.getNegativeReviewCountByEmployId(tb_performEmployId.Text);
-            l_performFavourableReviewCountData.Text = favourableReviewCount.ToString();
-            l_performFavourableReviewRateData.Text = ((((float)favourableReviewCount) / ((float)(favourableReviewCount + negetiveReviewCount))) * 100).ToString("F2") + "%";
-            l_performNegativeReviewCountData.Text = negetiveReviewCount.ToString();
-            l_performNegativeReviewRateData.Text = ((((float)negetiveReviewCount) / ((float)(favourableReviewCount + negetiveReviewCount))) * 100).ToString("F2") + "%";
+            bool isExist = false;
+
+            DataTable allEmployeeId = helper.getAllEmployeeId();
+            for (int i = 0; i < allEmployeeId.Rows.Count; i++)
+            {
+                if (tb_performEmployId.Text.Equals(allEmployeeId.Rows[i][0].ToString()))
+                {
+                    int favourableReviewCount = helper.getFavourableReviewCountByEmployId(tb_performEmployId.Text);
+                    int negetiveReviewCount = helper.getNegativeReviewCountByEmployId(tb_performEmployId.Text);
+                    l_performFavourableReviewCountData.Text = favourableReviewCount.ToString();
+                    if (favourableReviewCount == 0)
+                    {
+                        l_performFavourableReviewRateData.Text = "0%";
+                    }
+                    else
+                    {
+                        l_performFavourableReviewRateData.Text = ((((float)favourableReviewCount) / ((float)(favourableReviewCount + negetiveReviewCount))) * 100).ToString("F2") + "%";
+                    }
+                    l_performNegativeReviewCountData.Text = negetiveReviewCount.ToString();
+                    if (negetiveReviewCount == 0)
+                    {
+                        l_performNegativeReviewRateData.Text = "0%";
+                    }
+                    else
+                    {
+                        l_performNegativeReviewRateData.Text = ((((float)negetiveReviewCount) / ((float)(favourableReviewCount + negetiveReviewCount))) * 100).ToString("F2") + "%";
+                    }
+                    isExist = true;
+                }
+            }
+            if (isExist == false)
+            {
+                MessageBox.Show("The employee is NOT exist!", "", MessageBoxButtons.YesNo);
+            }
         }
+
+        //------------------------------------------------
 
         //Comment Page
         //employeePerform update
         private void employeePerform_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (employeePerform.Rows.Count > 0)
+            if (employeeComment.Rows.Count > 0)
             {
                 int pos = e.ColumnIndex;
 
                 if (e.ColumnIndex == 0 || e.ColumnIndex == 2)
                 {
-                    helper.updateEmployeePerform(pos, this.employeePerform.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
-                        int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[4].Value.ToString()));
+                    helper.updateEmployeePerform(pos, this.employeeComment.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(),
+                        int.Parse(this.employeeComment.Rows[e.RowIndex].Cells[4].Value.ToString()));
                 }
                 else if (e.ColumnIndex == 3)
                 {
-                    helper.updateEmployeePerform(pos, int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()),
-                       int.Parse(this.employeePerform.Rows[e.RowIndex].Cells[4].Value.ToString()));
+                    helper.updateEmployeePerform(pos, int.Parse(this.employeeComment.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()),
+                       int.Parse(this.employeeComment.Rows[e.RowIndex].Cells[4].Value.ToString()));
                 }
-
                 else
                 {
 
                 }
-                employeePerform.DataSource = helper.showEmployeePerform();
+                employeeComment.DataSource = helper.showEmployeePerform();
             }
         }
-
         //submit a new employee perform
-        private void submitButton_Click(object sender, EventArgs e)
+        private void btn_commentSubmit_Click(object sender, EventArgs e)
         {
+            bool isExist = false;
 
-            var result = MessageBox.Show("Sure to submit?", "",MessageBoxButtons.YesNo);
-
-            //confirm to submit
-            if (result == DialogResult.Yes)
+            DataTable allEmployeeId = helper.getAllEmployeeId();
+            for (int i = 0; i < allEmployeeId.Rows.Count; i++)
             {
-                int type = 0;
-                if (positiveRadio.Checked)
+                if (tb_commentEmployeeId.Text.Equals(allEmployeeId.Rows[i][0].ToString()))
                 {
-                    type = 1;
-                }
-                else if (nagetiveRadio.Checked)
-                {
-                    type = -1;
-                }
-
-                if (helper.insertEmployeePerform(employeeIdBox.Text, reasonBox.Text, type))
-                {
-                    MessageBox.Show("Success!");
-                    employeeIdBox.Text = "";
-                    reasonBox.Text = "";
-                    nagetiveRadio.Checked = false;
-                    positiveRadio.Checked = false;
-
-                    //highlight and top the inserted record 
-                    //refresh datasource
-                    employeePerform.DataSource = helper.showEmployeePerform();
-
-                    //get the behavior_id of the newest record
-                    decimal behaviorid = helper.getBehaviorId();
-
-                    //get the index of the newest record in DataGridView (using linq)
-                    int index = -1;
-                    DataGridViewRow row = employeePerform.Rows
-                        .Cast<DataGridViewRow>()
-                        .Where(r => decimal.Parse(r.Cells[4].Value.ToString()) == behaviorid)
-                        .First();
-                    index = row.Index;
-
-                    //set it to the first one
-                    employeePerform.FirstDisplayedScrollingRowIndex = index;
-
-                    //highlight
-                    employeePerform.ClearSelection();
-                    employeePerform.Rows[index].Selected = true;
-
-
-                    //
-                    //foreach (DataGridViewRow row in employeePerform.Rows)
-                    //{
-                    //    string value = row.Cells[4].Value.ToString();
-                    //    decimal valueDecimal = decimal.Parse(value);
-
-                    //    if (valueDecimal == behaviorid)
-                    //    {
-                    //        employeePerform.FirstDisplayedScrollingRowIndex = row.Index;
-                    //    }
-                    //}
-
+                    isExist = true;
+                    break;
                 }
             }
-            else
+
+            if (isExist == true)
             {
+                var result = MessageBox.Show("Sure to submit?", "",MessageBoxButtons.YesNo);
 
-            }
-        }
-
-
-
-        //JobTitle Page(无效)
-        //
-        private void showAll_Click(object sender, EventArgs e)
-        {
-            employeeJobTitle.DataSource = helper.showEmployeeJobTitle();
-        }
-
-        //submitButton2_Click
-        private void submitButton2_Click(object sender, EventArgs e)
-        {
-            employeeJobTitle.DataSource = helper.searchJobTitle(employeeIdBox2.Text);
-        }
-
-        //employeeJobTitle update
-        private void employeeJobTitle_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            var result = MessageBox.Show("Sure to submit?", "", MessageBoxButtons.YesNo);
-
-            //confirm to submit
-            if (result == DialogResult.Yes)
-            {
-                if (employeeJobTitle.Rows.Count > 0)
+                //confirm to submit
+                if (result == DialogResult.Yes)
                 {
-                    switch (e.ColumnIndex)
+                    int type = 0;
+                    if (rbtn_commentFavourable.Checked)
                     {
-                        case 2:
-                            //helper.updateEmployeeJobTitle(e.ColumnIndex, this.employeeJobTitle.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeJobTitle.Rows[e.RowIndex].Cells[2].Value.ToString());
-                            helper.updateEmployeeJobTitle(e.ColumnIndex, this.employeeJobTitle.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeJobTitle.Rows[e.RowIndex].Cells[2].Value.ToString());
-                            break;
-                        case 3:
-                            helper.updateEmployeeJobTitle(e.ColumnIndex, this.employeeJobTitle.Rows[e.RowIndex].Cells[0].Value.ToString(), this.employeeJobTitle.Rows[e.RowIndex].Cells[3].Value.ToString());
-                            break;
+                        type = 1;
+                    }
+                    else if (rbtn_commentNagetive.Checked)
+                    {
+                        type = -1;
+                    }
+
+                    if (helper.insertEmployeePerform(tb_commentEmployeeId.Text, tb_commentReason.Text, type))
+                    {
+                        MessageBox.Show("Success!");
+                        tb_commentEmployeeId.Text = "";
+                        tb_commentReason.Text = "";
+                        rbtn_commentNagetive.Checked = false;
+                        rbtn_commentFavourable.Checked = false;
+
+                        //highlight and top the inserted record 
+                        //refresh datasource
+                        employeeComment.DataSource = helper.showEmployeePerform();
+
+                        //get the behavior_id of the newest record
+                        decimal behaviorid = helper.getBehaviorId();
+
+                        //get the index of the newest record in DataGridView (using linq)
+                        int index = -1;
+                        DataGridViewRow row = employeeComment.Rows
+                            .Cast<DataGridViewRow>()
+                            .Where(r => decimal.Parse(r.Cells[4].Value.ToString()) == behaviorid)
+                            .First();
+                        index = row.Index;
+
+                        //set it to the first one
+                        employeeComment.FirstDisplayedScrollingRowIndex = index;
+
+                        //highlight
+                        employeeComment.ClearSelection();
+                        employeeComment.Rows[index].Selected = true;
+
+                        //
+                        //foreach (DataGridViewRow row in employeePerform.Rows)
+                        //{
+                        //    string value = row.Cells[4].Value.ToString();
+                        //    decimal valueDecimal = decimal.Parse(value);
+
+                        //    if (valueDecimal == behaviorid)
+                        //    {
+                        //        employeePerform.FirstDisplayedScrollingRowIndex = row.Index;
+                        //    }
+                        //}
                     }
                 }
-                employeeJobTitle.DataSource = helper.showEmployeeJobTitle();
             }
             else
             {
-                employeeJobTitle.DataSource = helper.showEmployeeJobTitle();
+                MessageBox.Show("The employee is NOT exist!", "", MessageBoxButtons.YesNo);
             }
         }
 
+        //------------------------------------------------
 
-        //Salary Page(HR Switch Page)
+        //HR Switch Page
         private void btn_HRSwitchSubmit_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show("Sure to submit?", "", MessageBoxButtons.YesNo);
@@ -218,16 +240,15 @@ namespace HotelHR
             }
         }
         //showAll
-        private void showAll2_Click(object sender, EventArgs e)
+        private void btn_HRSwitchShowAll_Click(object sender, EventArgs e)
         {
             employeeHRSwitch.DataSource = helper.showEmployeeSalary();
         }
         //search
-        private void submitButton3_Click(object sender, EventArgs e)
+        private void btn_HRSwitchSearch_Click(object sender, EventArgs e)
         {
-            employeeHRSwitch.DataSource = helper.searchHRSwitch(employeeIdBox3.Text);
+            employeeHRSwitch.DataSource = helper.searchHRSwitch(tb_HRSwitchEmployeeId.Text);
         }
-
         //employeeSalary update
         private void employeeSalary_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -255,6 +276,12 @@ namespace HotelHR
                 employeeHRSwitch.DataSource = helper.showEmployeeSalary();
             }
         }
+
+        //------------------------------------------------
+
+        //pipeline Page
+
+        //------------------------------------------------
 
         //employeeInfo Page
         //update
@@ -347,67 +374,6 @@ namespace HotelHR
                 }
             }
         }
-        //private void submitButton_Click(object sender, EventArgs e)
-        //{
-
-        //    var result = MessageBox.Show("Sure to submit?", "", MessageBoxButtons.YesNo);
-
-        //    //confirm to submit
-        //    if (result == DialogResult.Yes)
-        //    {
-        //        if (helper.insertEmployeePerform(employeeIdBox.Text, reasonBox.Text, type))
-        //        {
-        //            MessageBox.Show("Success!");
-        //            employeeIdBox.Text = "";
-        //            reasonBox.Text = "";
-        //            nagetiveRadio.Checked = false;
-        //            positiveRadio.Checked = false;
-
-        //            //highlight and top the inserted record 
-
-        //            //refresh datasource
-        //            employeePerform.DataSource = helper.showEmployeePerform();
-
-        //            //get the index of 
-
-        //        }
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //}
-        //employeeInfo insert
-        //private void employeeInfo_AllowUserToAddRowsChanged(object sender, EventArgs e)
-        //{
-        //    MessageBox.Show("failed");
-        //    if (!helper.isEmployeeIdExist(this.employeeInfo.Rows[((DataGridViewCellEventArgs)e).RowIndex].Cells[0].Value.ToString()))
-        //    //if (!helper.isEmployeeIdExist(this.employeeInfo.Columns)
-        //    {
-                
-        //    }
-        //    else
-        //    { 
-        //        MessageBox.Show("failed");
-        //    }
-            
-        //}
-        //private void employeeInfo_RowLeave(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    if(this.employeeInfo.RowCount - 1 == e.RowIndex)
-        //    {
-        //        if (!helper.isEmployeeIdExist(this.employeeInfo.Rows[e.RowIndex].Cells[0].Value.ToString()))
-        //        {
-
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("failed");
-        //        }
-        //    }
-            
-
-        //}
 
         #region empty methods
 
@@ -443,30 +409,9 @@ namespace HotelHR
         #endregion
 
         #region methods to be executed when tab-button MouseDown event occur
-        private void button4_MouseDown(object sender, MouseEventArgs e)
-        {
-            this.btn_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_info.FlatAppearance.BorderSize = 0;
-            this.btn_info.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_perform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.btn_perform.FlatAppearance.BorderSize = 1;
-            this.btn_perform.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btn_comment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.btn_comment.FlatAppearance.BorderSize = 1;
-            this.btn_comment.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btn_HRSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.btn_HRSwitch.FlatAppearance.BorderSize = 1;
-            this.btn_HRSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.button5.FlatAppearance.BorderSize = 1;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btn_pipeline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.btn_pipeline.FlatAppearance.BorderSize = 1;
-            this.btn_pipeline.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.employPerform.SelectedIndex = 3;
-        }
+        
 
-        private void button1_MouseDown(object sender, MouseEventArgs e)
+        private void btn_perform_MouseDown(object sender, MouseEventArgs e)
         {
             this.btn_perform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_perform.FlatAppearance.BorderSize = 0;
@@ -480,16 +425,13 @@ namespace HotelHR
             this.btn_HRSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
             this.btn_HRSwitch.FlatAppearance.BorderSize = 1;
             this.btn_HRSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.button5.FlatAppearance.BorderSize = 1;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btn_pipeline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
             this.btn_pipeline.FlatAppearance.BorderSize = 1;
             this.btn_pipeline.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.employPerform.SelectedIndex = 4;
+            this.tc_employPerform.SelectedIndex = 0;
         }
 
-        private void button2_MouseDown(object sender, MouseEventArgs e)
+        private void btn_comment_MouseDown(object sender, MouseEventArgs e)
         {
             this.btn_comment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_comment.FlatAppearance.BorderSize = 0;
@@ -503,16 +445,13 @@ namespace HotelHR
             this.btn_HRSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
             this.btn_HRSwitch.FlatAppearance.BorderSize = 1;
             this.btn_HRSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.button5.FlatAppearance.BorderSize = 1;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btn_pipeline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
             this.btn_pipeline.FlatAppearance.BorderSize = 1;
             this.btn_pipeline.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.employPerform.SelectedIndex = 0;
+            this.tc_employPerform.SelectedIndex = 1;
         }
 
-        private void button3_MouseDown(object sender, MouseEventArgs e)
+        private void btn_HRSwitch_MouseDown(object sender, MouseEventArgs e)
         {
             this.btn_HRSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_HRSwitch.FlatAppearance.BorderSize = 0;
@@ -526,50 +465,17 @@ namespace HotelHR
             this.btn_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
             this.btn_info.FlatAppearance.BorderSize = 1;
             this.btn_info.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.button5.FlatAppearance.BorderSize = 1;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btn_pipeline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
             this.btn_pipeline.FlatAppearance.BorderSize = 1;
             this.btn_pipeline.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.employPerform.SelectedIndex = 2;
+            this.tc_employPerform.SelectedIndex = 2;
         }
-        
 
-        private void button5_MouseDown(object sender, MouseEventArgs e)
-        {
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_HRSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.btn_HRSwitch.FlatAppearance.BorderSize = 1;
-            this.btn_HRSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btn_perform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.btn_perform.FlatAppearance.BorderSize = 1;
-            this.btn_perform.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btn_comment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.btn_comment.FlatAppearance.BorderSize = 1;
-            this.btn_comment.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btn_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.btn_info.FlatAppearance.BorderSize = 1;
-            this.btn_info.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btn_pipeline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.btn_pipeline.FlatAppearance.BorderSize = 1;
-            this.btn_pipeline.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.employPerform.SelectedIndex = 1;
-        }
-       
-
-      
-
-        private void button6_MouseDown(object sender, MouseEventArgs e)
+        private void btn_pipeline_MouseDown(object sender, MouseEventArgs e)
         {
             this.btn_pipeline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_pipeline.FlatAppearance.BorderSize = 0;
             this.btn_pipeline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
-            this.button5.FlatAppearance.BorderSize = 1;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btn_HRSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
             this.btn_HRSwitch.FlatAppearance.BorderSize = 1;
             this.btn_HRSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
@@ -582,19 +488,30 @@ namespace HotelHR
             this.btn_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
             this.btn_info.FlatAppearance.BorderSize = 1;
             this.btn_info.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.employPerform.SelectedIndex = 5;
+            this.tc_employPerform.SelectedIndex = 3;
+        }
+
+        private void btn_info_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.btn_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_info.FlatAppearance.BorderSize = 0;
+            this.btn_info.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_perform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_perform.FlatAppearance.BorderSize = 1;
+            this.btn_perform.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_comment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_comment.FlatAppearance.BorderSize = 1;
+            this.btn_comment.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_HRSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_HRSwitch.FlatAppearance.BorderSize = 1;
+            this.btn_HRSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btn_pipeline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+            this.btn_pipeline.FlatAppearance.BorderSize = 1;
+            this.btn_pipeline.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.tc_employPerform.SelectedIndex = 4;
         }
 
  #endregion
-
-        
-
-        
-
-
-
-
-
 
     }
 }
