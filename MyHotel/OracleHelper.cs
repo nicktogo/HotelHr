@@ -17,17 +17,69 @@ namespace OracleDBHelper
 
         public OracleHelper()
         {
-            //-修改过
             //connectionString = "User id=scott;password=0000;data source=localhost:1521/orcl;";
             connectionString = "User id=scott;password=tjsselps;data source=221.239.198.134:1521/hotel;";
-            //修改过-
             conn = new OracleConnection(connectionString);
             conn.Open();
 
             cmd = new OracleCommand();
             cmd.Connection = conn;
-            cmd.CommandType = CommandType.Text;
+            cmd.CommandType = CommandType.Text;         
         }
+
+        //------------------------------------------------
+
+        //自动将工资支出信息放入account中 相关函数
+        //
+        public bool newSalaryTypeAccount(long salarySum, string timeNow)
+        {
+            cmd.CommandText = "insert into account(TYPE,AMOUNT,TIME) values('1'," + salarySum + ",'" + timeNow + "')";
+
+            if (cmd.ExecuteNonQuery() <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        //getAllSalaryTypeAccountTime
+        public DataTable getAllSalaryTypeAccountTime()
+        {
+            DataTable allSalaryTypeAccountTime;
+
+            cmd.CommandText = "select TIME from account where TYPE=1";
+
+            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
+
+            DataSet dataSet = new DataSet();
+
+            adapter.Fill(dataSet);
+
+            allSalaryTypeAccountTime = dataSet.Tables[0];
+
+            return allSalaryTypeAccountTime;
+        }
+        //getSalarySum
+        public long getSalarySum()
+        {
+            DataTable SalarySum;
+
+            cmd.CommandText = "select sum(salary) from works";
+
+            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
+
+            DataSet dataSet = new DataSet();
+
+            adapter.Fill(dataSet);
+
+            SalarySum = dataSet.Tables[0];
+
+            return long.Parse(SalarySum.Rows[0][0].ToString());
+        }
+
+        //------------------------------------------------
 
         //Perform Page
         public int getFavourableReviewCountByEmployId(string employId)
@@ -63,8 +115,10 @@ namespace OracleDBHelper
             return int.Parse(Perform.Rows[0][0].ToString());
         }
 
+        //------------------------------------------------
+
         //Comment Page
-        //updateEmployeePerform(0,2)
+        //updateEmployeePerform(string)
         public bool updateEmployeePerform(int pos, string newData, int behaviorId)
         {
             if (pos == 0)
@@ -90,7 +144,7 @@ namespace OracleDBHelper
                 return true;
             }
         }
-        //updateEmployeePerform(3)
+        //updateEmployeePerform(int)
         public bool updateEmployeePerform(int pos, int newData, int behaviorId)
         {
             if (pos == 3)
@@ -111,7 +165,7 @@ namespace OracleDBHelper
                 return true;
             }
         }
-        //
+        //showEmployeePerform
         public DataTable showEmployeePerform()
         {
             DataTable PerformTable;
@@ -128,7 +182,6 @@ namespace OracleDBHelper
 
             return PerformTable;
         }
-
         //insertEmployeePerform
         public bool insertEmployeePerform(string employeeId,string reason, int type)
         {
@@ -153,7 +206,6 @@ namespace OracleDBHelper
                 return true;
             }
         }
-
         //get the behavior_id of the new record
         public decimal getBehaviorId()
         {
@@ -161,79 +213,17 @@ namespace OracleDBHelper
 
             cmd.CommandText = "select count(behavior_id) from behavior";
 
-            behaviorId = (decimal)cmd.ExecuteScalar() + 9;
+            behaviorId = (decimal)cmd.ExecuteScalar();
 
             return behaviorId;
 
         }
 
-        
-
-        //JobTitle Page(无效)
-        //SearchJobTitle
-        public DataTable searchJobTitle(string employeeId)
-        {
-            DataTable SearchJobTitleTable;
-
-            cmd.CommandText = "select e.employ_id,employ_name,position from employ e,works w where e.employ_id = w.employ_id and e.employ_id ='" + employeeId + "'";
-
-            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
-
-            DataSet dataSet = new DataSet();
-
-            adapter.Fill(dataSet);
-
-            SearchJobTitleTable = dataSet.Tables[0];
-
-            return SearchJobTitleTable;
-        }
-
-        //UpdateEmployeeJobTitle
-        public bool updateEmployeeJobTitle(int pos, string employeeId, string newData)
-        {
-            switch (pos)
-            {
-                case 2:
-                    cmd.CommandText = "update works set position='" + newData + "' where employ_id=" + employeeId;
-                    break;
-                case 3:
-                    cmd.CommandText = "update works set salary='" + newData + "' where employ_id=" + employeeId;
-                    break;
-            }
-
-            if (cmd.ExecuteNonQuery() <= 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        public DataTable showEmployeeJobTitle()
-        {
-            DataTable JobTitleTable;
-
-            cmd.CommandText = "select e.employ_id,employ_name,position,salary " +
-               "from employ e,works w " +
-               "where e.employ_id=w.employ_id";
-
-            OracleDataAdapter adapter = new OracleDataAdapter(cmd);
-
-            DataSet dataSet = new DataSet();
-
-            adapter.Fill(dataSet);
-
-            JobTitleTable = dataSet.Tables[0];
-
-            return JobTitleTable;
-        }
+        //------------------------------------------------
 
         //Salary (HRSwitch) Page
         public bool HRSwitchSalaryChange(string position, int salaryChanged)
         {
-            //cmd.CommandText = "update works set position='" + newData + "' where employ_id=" + employeeId;
             cmd.CommandText = "update works set salary=salary+" + salaryChanged + " where position='" + position + "'";
 
             if (cmd.ExecuteNonQuery() <= 0)
@@ -245,7 +235,6 @@ namespace OracleDBHelper
                 return true;
             }
         }
-
         //searchHRSwitch
         public DataTable searchHRSwitch(string employeeId)
         {
@@ -263,7 +252,6 @@ namespace OracleDBHelper
 
             return searchHRSwitchTable;
         }
-
         //UpdateHRSwitch(string)
         public bool updateHRSwitch(string employeeId, string newData)
         {
@@ -294,7 +282,7 @@ namespace OracleDBHelper
                 return true;
             }
         }
-
+        //showEmployeeSalary
         public DataTable showEmployeeSalary()
         {
             DataTable SalaryTable;
@@ -314,8 +302,10 @@ namespace OracleDBHelper
             return SalaryTable;
         }
 
+        //------------------------------------------------
+
         //Info Page
-        //update(1,2,3,4,5,7,8)
+        //update(string)
         public bool updateEmployeeInfo(int pos, string employeeId, string newData)
         {
             switch (pos)
@@ -355,7 +345,7 @@ namespace OracleDBHelper
                 return true;
             }
         }
-        //update(6)
+        //update(int)
         public bool updateEmployeeInfo(int pos, string employeeId, int newData)
         {
             cmd.CommandText = "update employ set WORK_YEAR='" + newData + "' where employ_id=" + employeeId;
@@ -369,7 +359,7 @@ namespace OracleDBHelper
                 return true;
             }
         }
-        //
+        //getAllEmployeeId
         public DataTable getAllEmployeeId()
         {
             DataTable allEmployeeId;
@@ -386,7 +376,7 @@ namespace OracleDBHelper
 
             return allEmployeeId;
         }
-        //
+        //deleteEmployeeInfo
         public bool deleteEmployeeInfo(string employeeId)
         {
             cmd.CommandText = "delete from employ where EMPLOY_ID='" + employeeId + "'";
@@ -400,7 +390,7 @@ namespace OracleDBHelper
                 return true;
             }
         }
-        //
+        //insertEmployeeInfo
         public bool insertEmployeeInfo(string employeeId, string employeeName, string gender, string address, string citizenId, string inDate, int workYear, string status, string password)
         {
             string[] date = inDate.Split('/');
@@ -419,19 +409,6 @@ namespace OracleDBHelper
                 return true;
             }
         }
-        //insert check employeeId
-        //public bool isEmployeeIdExist(string employeeId)
-        //{
-        //    cmd.CommandText = "select employ_id from employ where employ_id ='" + employeeId + "'";
-        //    if (cmd.ExecuteScalar() == null)
-        //    {
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        return true;
-        //    }    
-        //}
         //showEmployeeInfo
         public DataTable showEmployeeInfo()
         {
@@ -450,18 +427,13 @@ namespace OracleDBHelper
             return infoTable;
         }
 
-
-
+        //------------------------------------------------
 
         public void closeConn()
         {
             conn.Dispose();
         }
 
-        //internal void UpdateEmployeeSalary(string p1, string p2)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
     }
 }
 
